@@ -1,14 +1,14 @@
-import { LinkingOptions } from '@react-navigation/native'
+import { LinkingOptions } from '@react-navigation/native';
 
 export type ScreenParamList = {
-  Home: undefined
-}
+	Home: undefined;
+};
 
 export const linking: LinkingOptions<ScreenParamList> = {
-  prefixes: ['https://card.stormgate.io'],
-  config: {
-    screens: {
-      Home: '/',
-    },
-  },
-}
+	prefixes: ['https://card.stormgate.io'],
+	config: {
+		screens: {
+			Home: '/',
+		},
+	},
+};
