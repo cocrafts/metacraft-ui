@@ -15,7 +15,10 @@ export const HomeScreen: FC = () => {
 			<Text>
 				Still too early to have something to show.. but this going to be fun!
 			</Text>
-			<Button style={styles.buttonContainer} />
+			<Button
+				style={styles.buttonContainer}
+				onPress={() => console.log('pressed!')}
+			/>
 		</View>
 	);
 };
