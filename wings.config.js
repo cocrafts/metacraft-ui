@@ -1,8 +1,11 @@
-const setEnvironments = (configs, { webpack }) => {
+const setEnvironments = (configs, { webpack, wingsConfig }) => {
 	const { DefinePlugin } = webpack;
+	const env = wingsConfig.env();
+	const isProduction = wingsConfig.isProduction(env);
 
 	configs.plugins[0] = new DefinePlugin({
 		process: { env: {} },
+		__DEV__: !isProduction,
 	});
 
 	return configs;
