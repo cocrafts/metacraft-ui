@@ -9,7 +9,9 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"dependencies": {},
+	"dependencies": {
+		"valtio": "^1.4.0"
+	},
 	"peerDependencies": {
 		"react": "^17.0.2",
 		"react-art": "^17.0.2",
