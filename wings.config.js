@@ -1,3 +1,13 @@
+const setEnvironments = (configs, { webpack }) => {
+	const { DefinePlugin } = webpack;
+
+	configs.plugins[0] = new DefinePlugin({
+		process: { env: {} },
+	});
+
+	return configs;
+};
+
 const splitBundle = (configs) => {
 	configs.entry = {
 		app: {
@@ -12,17 +22,14 @@ const splitBundle = (configs) => {
 				'react-art',
 				'@react-native-async-storage/async-storage',
 			],
-		}
+		},
 	};
 
 	return configs;
 };
 
-
 module.exports = {
-	webpackConfigs: [
-		splitBundle,
-	],
+	webpackConfigs: [setEnvironments, splitBundle],
 	moduleAlias: () => {
 		return {
 			global: {
