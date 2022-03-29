@@ -1,0 +1,70 @@
+<%
+const isSSR = typeof ssrContext !== 'undefined';
+function get(name, defaultValue) {
+  if (typeof htmlWebpackPlugin !== 'undefined') {
+    return htmlWebpackPlugin.options[name];
+  } else {
+    return ssrContext[name] || defaultValue;
+  }
+}
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Marketplace</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="icon" type="image/png" href="/master/favicon.png"/>
+  <link href="<%= get('publicPath')%>preload.css" rel="preload" as="style">
+  <link href="<%= get('publicPath')%>preload.css" rel="stylesheet">
+
+  <% if (isSSR) { %>
+    <%-get('preHeading', '')%>
+  <% } else { %>
+    <%=get('preHeading', '')%>
+  <% } %>
+
+  <% if (isSSR) { %>
+    <%-get('postHeading', '')%>
+  <% } else { %>
+    <%=get('postHeading', '')%>
+  <% } %>
+  <%- get('initialStyles', '')%>
+</head>
+
+<body>
+  <div id="root"><%- get('initialHtml', '')%></div>
+  <% if (isSSR) { %>
+    <%-get('preContent', '')%>
+  <% } else { %>
+    <%=get('preContent', '')%>
+  <% } %>
+
+  <%if (isSSR) { %>
+    <% if (get('initialProps')) { %>
+      <script id="initialPropsInjector">
+        ssrInitialProps = <%-JSON.stringify(get('initialProps'))%>
+        var elem = document.getElementById("initialPropsInjector");
+        elem.parentNode.removeChild(elem);
+      </script>
+    <% } %>
+    <% if (get('isProduction') === true) { %>
+      <script src="<%= get('publicPath') + get('buildId')%>.js"></script>
+    <% } else { %>
+      <script src="<%= get('publicPath')%>app.js"></script>
+    <% } %>
+    <script src="<%= get('publicPath')%>react-core.js"></script>
+    <script src="<%= get('publicPath')%>app-vendors.js"></script>
+  <% } %>
+
+  <% if (isSSR) { %>
+    <%-get('postContent', '')%>
+  <% } else { %>
+    <%=get('postContent', '')%>
+  <% } %>
+</body>
+</html>

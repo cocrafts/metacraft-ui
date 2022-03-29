@@ -6,6 +6,7 @@ const setEnvironments = (configs, { webpack, wingsConfig }) => {
 	configs.plugins[0] = new DefinePlugin({
 		process: { env: {} },
 		__DEV__: !isProduction,
+		PUBLIC_URL: JSON.stringify(process.env.PUBLIC_URL || 'master'),
 	});
 
 	return configs;
