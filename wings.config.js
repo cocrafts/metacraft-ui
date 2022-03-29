@@ -1,3 +1,6 @@
+const { resolve } = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
+
 const setEnvironments = (configs, { webpack, wingsConfig }) => {
 	const { DefinePlugin } = webpack;
 	const env = wingsConfig.env();
@@ -8,6 +11,16 @@ const setEnvironments = (configs, { webpack, wingsConfig }) => {
 		__DEV__: !isProduction,
 		PUBLIC_URL: JSON.stringify(process.env.PUBLIC_URL || 'master'),
 	});
+
+	return configs;
+};
+
+const copyAssets = (configs) => {
+	configs.plugins.push(
+		new CopyPlugin({
+			patterns: [{ from: resolve(process.cwd(), 'assets/'), to: './' }],
+		}),
+	);
 
 	return configs;
 };
@@ -36,7 +49,7 @@ module.exports = {
 	publicPath: () => process.env.PUBLIC_URL || '/',
 	keepPreviousBuild: () => true,
 	buildId: () => 'app',
-	webpackConfigs: [setEnvironments, splitBundle],
+	webpackConfigs: [setEnvironments, copyAssets, splitBundle],
 	moduleAlias: () => {
 		return {
 			global: {
