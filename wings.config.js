@@ -33,6 +33,9 @@ const splitBundle = (configs) => {
 };
 
 module.exports = {
+	publicPath: () => process.env.PUBLIC_URL || '/',
+	keepPreviousBuild: () => true,
+	buildId: () => 'app',
 	webpackConfigs: [setEnvironments, splitBundle],
 	moduleAlias: () => {
 		return {
