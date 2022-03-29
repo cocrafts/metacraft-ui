@@ -38,7 +38,7 @@ resource "aws_cloudfront_distribution" "app" {
   enabled = true
   is_ipv6_enabled = true
   default_root_object = "index.html"
-  aliases = ["ui.stormgate.io"]
+  aliases = ["kit.stormgate.io"]
 
   origin {
     domain_name = aws_s3_bucket.app.bucket_regional_domain_name
