@@ -2,10 +2,18 @@
 	"name": "wings-ruui-ts",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.web.js",
+	"main": "lib/commonjs/index.js",
+	"module": "lib/module/index.js",
+	"react-native": "src/index.ts",
+	"types": "lib/typescript/index.d.ts",
+	"files": [
+		"lib/",
+		"src/"
+	],
 	"scripts": {
 		"gen": "node tool/gen",
 		"invalidate": "node tool/invalidate",
+		"build": "bob build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
