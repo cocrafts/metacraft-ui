@@ -5,9 +5,13 @@
 		"esModuleInterop": true,
 		"jsx": "react-native",
 		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"noEmit": true,
+		"isolatedModules": true,
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "esnext",
+		"lib": ["es2017"],
 		"baseUrl": ".",
 		"paths": {
 			"components/*": ["./src/components/*"],
