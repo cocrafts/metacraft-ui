@@ -1,6 +1,6 @@
 {
-	"name": "wings-ruui-ts",
-	"version": "1.0.0",
+	"name": "@cocrafts/metacraft-ui",
+	"version": "0.0.12",
 	"description": "",
 	"main": "lib/commonjs/index.js",
 	"module": "lib/module/index.js",
@@ -19,8 +19,8 @@
 		"start": "react-native start",
 		"test": "jest"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": ["UI Kit", "React", "React Native"],
+	"author": "Metacraft Community",
 	"license": "ISC",
 	"dependencies": {
 		"react-native-gesture-handler": "^2.3.2",
