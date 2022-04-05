@@ -13,7 +13,8 @@ import {
 	useAnimatedReaction,
 	useSharedValue,
 } from 'react-native-reanimated';
-import { isHoverEnabled } from 'components/Hoverable/shared';
+
+import { isHoverEnabled } from './shared';
 
 export interface Props {
 	style?: StyleProp<ViewStyle>;

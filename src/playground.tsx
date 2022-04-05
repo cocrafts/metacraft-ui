@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import React, { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {
 	createStackNavigator,
@@ -14,7 +14,7 @@ const screenOptions: StackNavigationOptions = {
 	animationEnabled: false,
 };
 
-export const App: FC = () => {
+export const Playground: FC = () => {
 	return (
 		<NavigationContainer linking={linking}>
 			<Stack.Navigator screenOptions={screenOptions}>
@@ -24,4 +24,4 @@ export const App: FC = () => {
 	);
 };
 
-export default App;
+export default Playground;

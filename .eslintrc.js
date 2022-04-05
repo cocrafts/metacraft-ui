@@ -16,7 +16,6 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:import/typescript',
 		'plugin:react/recommended',
-		'plugin:react/jsx-runtime',
 		'plugin:@typescript-eslint/recommended',
 		'prettier',
 	],

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import {
 	StyleProp,
 	StyleSheet,
@@ -8,7 +8,8 @@ import {
 	ViewStyle,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-import Hoverable from 'components/Hoverable';
+
+import Hoverable from '../Hoverable';
 
 import { HoveredStyleFunc, useDefaultHoveredStyle } from './shared';
 
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-export const MetacraftButton: FC<Props> = ({
+export const Button: FC<Props> = ({
 	style,
 	useHoveredStyle = useDefaultHoveredStyle,
 	title = 'Button Title',
@@ -53,4 +54,4 @@ export const MetacraftButton: FC<Props> = ({
 	);
 };
 
-export default MetacraftButton;
+export default Button;

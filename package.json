@@ -1,6 +1,6 @@
 {
 	"name": "@cocrafts/metacraft-ui",
-	"version": "0.0.13",
+	"version": "0.0.20",
 	"description": "",
 	"main": "lib/commonjs/index.js",
 	"module": "lib/module/index.js",
@@ -17,7 +17,8 @@
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
 		"start": "react-native start",
-		"test": "jest"
+		"test": "jest",
+		"publish": "yarn build && npm publish"
 	},
 	"keywords": [
 		"UI Kit",
