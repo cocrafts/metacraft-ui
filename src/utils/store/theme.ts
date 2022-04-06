@@ -7,11 +7,11 @@ export interface ThemeColors {
 	bgLighter: string;
 }
 
-export interface Theme {
+export interface ThemeState {
 	colors: ThemeColors;
 }
 
-export const defaultTheme: Theme = {
+export const defaultTheme: ThemeState = {
 	colors: {
 		primary: '#3772fe',
 		bg: '#1b2136',
@@ -20,4 +20,4 @@ export const defaultTheme: Theme = {
 	},
 };
 
-export const themeState = proxy<Theme>(defaultTheme);
+export const themeState = proxy<ThemeState>(defaultTheme);
