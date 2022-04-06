@@ -4,9 +4,9 @@ import {
 	createStackNavigator,
 	StackNavigationOptions,
 } from '@react-navigation/stack';
+import ModalManager from 'components/ModalManager';
 import Home from 'screens/Home';
 import { linking } from 'utils/routes';
-
 const Stack = createStackNavigator();
 
 const screenOptions: StackNavigationOptions = {
@@ -20,6 +20,7 @@ export const Playground: FC = () => {
 			<Stack.Navigator screenOptions={screenOptions}>
 				<Stack.Screen name="Home" component={Home} />
 			</Stack.Navigator>
+			<ModalManager />
 		</NavigationContainer>
 	);
 };
