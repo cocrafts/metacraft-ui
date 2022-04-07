@@ -1,29 +1,20 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { FC, Fragment } from 'react';
 import { useSnapshot } from 'valtio';
 
 import { modalState } from '../../utils/store/modal';
 
-const styles = StyleSheet.create({
-	container: {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		bottom: 0,
-		right: 0,
-	},
-});
+import ModalContainer from './ModalContainer';
 
 export const ModalManager: FC = () => {
 	const { hashmap } = useSnapshot(modalState);
 	const instances = Object.values(hashmap);
 
 	return (
-		<View pointerEvents="box-none" style={styles.container}>
+		<Fragment>
 			{instances.map((item) => {
-				return <Text key={item.id}>{item.id}</Text>;
+				return <ModalContainer key={item.id} item={item} />;
 			})}
-		</View>
+		</Fragment>
 	);
 };
 
