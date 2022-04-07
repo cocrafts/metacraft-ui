@@ -1,7 +1,10 @@
+import { FunctionComponent } from 'react';
 import { proxy } from 'valtio';
 
 export interface ModalConfigs {
 	id?: string;
+	component: FunctionComponent;
+	hide?: boolean;
 }
 
 export interface ModalState {
@@ -11,14 +14,7 @@ export interface ModalState {
 
 export const modalState = proxy<ModalState>({
 	count: 0,
-	hashmap: {
-		default: {
-			id: 'default',
-		},
-		user: {
-			id: 'user',
-		},
-	},
+	hashmap: {},
 });
 
 export const modalActions = {
@@ -27,6 +23,6 @@ export const modalActions = {
 		modalState.hashmap[modalId] = configs;
 	},
 	hide: (id: string): void => {
-		delete modalState.hashmap[id];
+		modalState.hashmap[id].hide = true;
 	},
 };
