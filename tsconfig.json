@@ -7,7 +7,6 @@
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"noEmit": true,
-		"isolatedModules": true,
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "esnext",
