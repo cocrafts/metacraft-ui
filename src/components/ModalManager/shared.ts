@@ -84,6 +84,8 @@ export const rectangleAnimatedStyle = (
 	direction: AnimateDirections | undefined,
 	baseStyle: ViewStyle,
 ): ViewStyle => {
+	'worklet';
+
 	const animatedStyle: ViewStyle = {
 		transform: [],
 		...baseStyle,
