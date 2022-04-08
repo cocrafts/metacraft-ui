@@ -48,6 +48,28 @@ export const rectangleBind = (
 	} else if (direction === BindDirections.RightBottom) {
 		result.x = target.x + target.width + spacing;
 		result.y = target.y + target.height - current.height;
+	} else if (direction === BindDirections.InnerTop) {
+		result.y = target.y + spacing;
+	} else if (direction === BindDirections.InnerTopLeft) {
+		result.x = target.x + spacing;
+		result.y = target.y + spacing;
+	} else if (direction === BindDirections.InnerTopRight) {
+		result.x = target.x + target.width - current.width - spacing;
+		result.y = target.y + spacing;
+	} else if (direction === BindDirections.InnerBottom) {
+		result.y = target.y + target.height - current.height - spacing;
+	} else if (direction === BindDirections.InnerBottomLeft) {
+		result.x = target.x + spacing;
+		result.y = target.y + target.height - current.height - spacing;
+	} else if (direction === BindDirections.InnerBottomRight) {
+		result.x = target.x + target.width - current.width - spacing;
+		result.y = target.y + target.height - current.height - spacing;
+	} else if (direction === BindDirections.InnerLeft) {
+		result.x = target.x + spacing;
+		result.y = target.y + (target.height / 2 - current.height / 2);
+	} else if (direction === BindDirections.InnerRight) {
+		result.x = target.x + target.width - current.width - spacing;
+		result.y = target.y + (target.height / 2 - current.height / 2);
 	}
 
 	return result;

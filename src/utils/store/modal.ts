@@ -15,7 +15,15 @@ export enum BindDirections {
 	Right,
 	RightTop,
 	RightBottom,
-	Center,
+	Inner,
+	InnerTop,
+	InnerTopLeft,
+	InnerTopRight,
+	InnerBottom,
+	InnerBottomLeft,
+	InnerBottomRight,
+	InnerLeft,
+	InnerRight,
 }
 
 export interface ModalConfigs {
