@@ -5,12 +5,12 @@ import { BindDirections } from '../../utils/store/modal';
 export const rectangleBind = (
 	target: LayoutRectangle,
 	current: LayoutRectangle,
-	direction: BindDirections,
+	direction?: BindDirections,
 	spacing = 15,
 ): LayoutRectangle => {
 	const result: LayoutRectangle = {
 		x: target.x + (target.width / 2 - current.width / 2) /* <- middle */,
-		y: target.y + target.height + spacing /* <- bottom */,
+		y: target.y + (target.height / 2 - current.height / 2) /* <- bottom */,
 		width: current.width,
 		height: current.height,
 	};
@@ -23,6 +23,9 @@ export const rectangleBind = (
 	} else if (direction === BindDirections.TopRight) {
 		result.x = target.x + target.width - current.width;
 		result.y = target.y - current.height - spacing;
+	} else if (direction === BindDirections.Bottom) {
+		result.x = target.x + (target.width / 2 - current.width / 2);
+		result.y = target.y + target.height + spacing;
 	} else if (direction === BindDirections.BottomLeft) {
 		result.x = target.x;
 	} else if (direction === BindDirections.BottomRight) {

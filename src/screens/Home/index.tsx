@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from 'components/Button';
-import { modalActions } from 'utils/store/modal';
+import { BindDirections, modalActions } from 'utils/store/modal';
 
 import Popup from './Popup';
 
@@ -17,6 +17,7 @@ export const HomeScreen: FC = () => {
 		modalActions.show({
 			id: 'Cloud Le',
 			component: Popup,
+			bindingDirection: BindDirections.Top,
 			bindingRef: containerRef,
 		});
 	};

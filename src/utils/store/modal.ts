@@ -1,5 +1,5 @@
 import { FunctionComponent, RefObject } from 'react';
-import { LayoutRectangle, View } from 'react-native';
+import { Dimensions, LayoutRectangle, View } from 'react-native';
 import { proxy } from 'valtio';
 
 export enum BindDirections {
@@ -15,6 +15,7 @@ export enum BindDirections {
 	Right,
 	RightTop,
 	RightBottom,
+	Center,
 }
 
 export interface ModalConfigs {
@@ -44,7 +45,10 @@ export const modalState = proxy<ModalState>({
 const measureLayout = (
 	targetRef?: RefObject<View>,
 ): Promise<LayoutRectangle | undefined> => {
-	if (!targetRef?.current) return Promise.resolve(undefined);
+	if (!targetRef?.current) {
+		const { width, height } = Dimensions.get('window');
+		return Promise.resolve({ x: 0, y: 0, width, height });
+	}
 
 	return new Promise((resolve, reject) => {
 		targetRef.current?.measureLayout(
@@ -69,7 +73,6 @@ export const modalActions = {
 		const safeId = id || 'default-modal';
 
 		measureLayout(bindingRef).then((layout) => {
-			console.log(layout, '<--');
 			modalState.hashmap[safeId] = {
 				id: safeId,
 				bindingRectangle: layout,
