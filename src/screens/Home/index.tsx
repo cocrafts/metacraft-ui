@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from 'components/Button';
 import { modalActions } from 'utils/store/modal';
@@ -12,16 +12,20 @@ const styles = StyleSheet.create({
 });
 
 export const HomeScreen: FC = () => {
+	const containerRef = useRef<View>(null);
 	const showPopup = () => {
 		modalActions.show({
 			id: 'Cloud Le',
 			component: Popup,
+			bindingRef: containerRef,
 		});
 	};
 
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text>Welcome to Metacraft UI</Text>
+			<View ref={containerRef}>
+				<Text>Welcome to Metacraft UI</Text>
+			</View>
 			<Text>
 				Still too early to have something to show.. but this going to be fun!
 			</Text>

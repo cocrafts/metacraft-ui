@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import Animated, {
 	Extrapolate,
 	interpolate,
@@ -56,14 +56,14 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	};
 
 	return (
-		<Animated.View pointerEvents={pointerEvents} style={styles.container}>
+		<View pointerEvents={pointerEvents} style={styles.container}>
 			<TouchableWithoutFeedback onPress={closeModal}>
 				<Animated.View style={[styles.mask, maskStyle]} />
 			</TouchableWithoutFeedback>
 			<Animated.View style={wrapperStyle}>
 				<InnerComponent />
 			</Animated.View>
-		</Animated.View>
+		</View>
 	);
 };
 
