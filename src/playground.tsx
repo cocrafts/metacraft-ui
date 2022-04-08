@@ -4,7 +4,7 @@ import {
 	createStackNavigator,
 	StackNavigationOptions,
 } from '@react-navigation/stack';
-import ModalManager from 'components/ModalManager';
+import Provider from 'components/Provider';
 import Home from 'screens/Home';
 import { linking } from 'utils/routes';
 const Stack = createStackNavigator();
@@ -16,12 +16,13 @@ const screenOptions: StackNavigationOptions = {
 
 export const Playground: FC = () => {
 	return (
-		<NavigationContainer linking={linking}>
-			<Stack.Navigator screenOptions={screenOptions}>
-				<Stack.Screen name="Home" component={Home} />
-			</Stack.Navigator>
-			<ModalManager />
-		</NavigationContainer>
+		<Provider>
+			<NavigationContainer linking={linking}>
+				<Stack.Navigator screenOptions={screenOptions}>
+					<Stack.Screen name="Home" component={Home} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
 	);
 };
 

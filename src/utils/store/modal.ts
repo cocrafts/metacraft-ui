@@ -1,5 +1,5 @@
 import { FunctionComponent, RefObject } from 'react';
-import { findNodeHandle, LayoutRectangle, View } from 'react-native';
+import { LayoutRectangle, View } from 'react-native';
 import { proxy } from 'valtio';
 
 export enum BindDirections {
@@ -48,7 +48,7 @@ const measureLayout = (
 
 	return new Promise((resolve, reject) => {
 		targetRef.current?.measureLayout(
-			findNodeHandle(referenceMap.root.current) as number,
+			referenceMap.root.current as never,
 			(x, y, width, height) =>
 				resolve({
 					x,
@@ -69,6 +69,7 @@ export const modalActions = {
 		const safeId = id || 'default-modal';
 
 		measureLayout(bindingRef).then((layout) => {
+			console.log(layout, '<--');
 			modalState.hashmap[safeId] = {
 				id: safeId,
 				bindingRectangle: layout,
