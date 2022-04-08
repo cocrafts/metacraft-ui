@@ -1,6 +1,21 @@
 import { FunctionComponent } from 'react';
 import { proxy } from 'valtio';
 
+export enum BindDirections {
+	Top,
+	TopLeft,
+	TopRight,
+	Bottom,
+	BottomLeft,
+	BottomRight,
+	Left,
+	LeftTop,
+	LeftBottom,
+	Right,
+	RightTop,
+	RightBottom,
+}
+
 export interface ModalConfigs {
 	id?: string;
 	component: FunctionComponent;

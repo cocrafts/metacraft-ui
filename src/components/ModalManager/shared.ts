@@ -1,24 +1,11 @@
 import { LayoutRectangle } from 'react-native';
 
-export enum SnapDirections {
-	Top,
-	TopLeft,
-	TopRight,
-	Bottom,
-	BottomLeft,
-	BottomRight,
-	Left,
-	LeftTop,
-	LeftBottom,
-	Right,
-	RightTop,
-	RightBottom,
-}
+import { BindDirections } from '../../utils/store/modal';
 
 export const rectangleBind = (
 	target: LayoutRectangle,
 	current: LayoutRectangle,
-	direction: SnapDirections,
+	direction: BindDirections,
 	spacing = 15,
 ): LayoutRectangle => {
 	const result: LayoutRectangle = {
@@ -28,34 +15,34 @@ export const rectangleBind = (
 		height: current.height,
 	};
 
-	if (direction === SnapDirections.Top) {
+	if (direction === BindDirections.Top) {
 		result.y = target.y - current.height - spacing;
-	} else if (direction === SnapDirections.TopLeft) {
+	} else if (direction === BindDirections.TopLeft) {
 		result.x = target.x;
 		result.y = target.y - current.height - spacing;
-	} else if (direction === SnapDirections.TopRight) {
+	} else if (direction === BindDirections.TopRight) {
 		result.x = target.x + target.width - current.width;
 		result.y = target.y - current.height - spacing;
-	} else if (direction === SnapDirections.BottomLeft) {
+	} else if (direction === BindDirections.BottomLeft) {
 		result.x = target.x;
-	} else if (direction === SnapDirections.BottomRight) {
+	} else if (direction === BindDirections.BottomRight) {
 		result.x = target.x + target.width - current.width;
-	} else if (direction === SnapDirections.Left) {
+	} else if (direction === BindDirections.Left) {
 		result.x = target.x - current.width - spacing;
 		result.y = target.y + (target.height / 2 - current.height / 2);
-	} else if (direction === SnapDirections.LeftTop) {
+	} else if (direction === BindDirections.LeftTop) {
 		result.x = target.x - current.width - spacing;
 		result.y = target.y;
-	} else if (direction === SnapDirections.LeftBottom) {
+	} else if (direction === BindDirections.LeftBottom) {
 		result.x = target.x - current.width - spacing;
 		result.y = target.y + target.height - current.height;
-	} else if (direction === SnapDirections.Right) {
+	} else if (direction === BindDirections.Right) {
 		result.x = target.x + target.width + spacing;
 		result.y = target.y + (target.height / 2 - current.height / 2);
-	} else if (direction === SnapDirections.RightTop) {
+	} else if (direction === BindDirections.RightTop) {
 		result.x = target.x + target.width + spacing;
 		result.y = target.y;
-	} else if (direction === SnapDirections.RightBottom) {
+	} else if (direction === BindDirections.RightBottom) {
 		result.x = target.x + target.width + spacing;
 		result.y = target.y + target.height - current.height;
 	}
