@@ -1,5 +1,10 @@
 import React, { FC, useEffect } from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import {
+	LayoutChangeEvent,
+	StyleSheet,
+	TouchableWithoutFeedback,
+	View,
+} from 'react-native';
 import Animated, {
 	Extrapolate,
 	interpolate,
@@ -9,6 +14,8 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { modalActions, ModalConfigs } from '../../utils/store/modal';
+
+import { rectangleBind } from './shared';
 
 interface Props {
 	item: ModalConfigs;
@@ -21,8 +28,6 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		bottom: 0,
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
 	mask: {
 		position: 'absolute',
@@ -35,21 +40,40 @@ const styles = StyleSheet.create({
 });
 
 export const ModalContainer: FC<Props> = ({ item }) => {
-	const InnerComponent = item.component;
+	const { component: InnerComponent, bindingRectangle } = item;
+	const top = useSharedValue(0);
+	const left = useSharedValue(0);
 	const opacity = useSharedValue(0);
 	const pointerEvents = item.hide ? 'none' : 'auto';
 
 	const maskStyle = useAnimatedStyle(() => ({
 		opacity: interpolate(opacity.value, [0, 1], [0, 0.3], Extrapolate.CLAMP),
 	}));
-	const wrapperStyle = useAnimatedStyle(() => ({
-		opacity: opacity.value,
-		transform: [{ translateY: interpolate(opacity.value, [0, 1], [20, 0]) }],
-	}));
+
+	const wrapperStyle = useAnimatedStyle(() => {
+		return {
+			position: 'absolute',
+			top: top.value,
+			left: left.value,
+			opacity: opacity.value,
+			transform: [{ translateY: interpolate(opacity.value, [0, 1], [20, 0]) }],
+		};
+	}, []);
 
 	useEffect(() => {
 		opacity.value = withSpring(item.hide ? 0 : 1);
 	}, [item.hide]);
+
+	const onInnerLayout = ({ nativeEvent }: LayoutChangeEvent) => {
+		const calculatedRectangle = rectangleBind(
+			bindingRectangle as never,
+			nativeEvent.layout,
+			item.bindingDirection,
+		);
+
+		top.value = calculatedRectangle.y;
+		left.value = calculatedRectangle.x;
+	};
 
 	const closeModal = () => {
 		modalActions.hide(item.id as string);
@@ -60,7 +84,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 			<TouchableWithoutFeedback onPress={closeModal}>
 				<Animated.View style={[styles.mask, maskStyle]} />
 			</TouchableWithoutFeedback>
-			<Animated.View style={wrapperStyle}>
+			<Animated.View onLayout={onInnerLayout} style={wrapperStyle}>
 				<InnerComponent />
 			</Animated.View>
 		</View>
