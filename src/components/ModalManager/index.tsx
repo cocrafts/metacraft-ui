@@ -19,3 +19,5 @@ export const ModalManager: FC = () => {
 };
 
 export default ModalManager;
+
+export * from './shared';
