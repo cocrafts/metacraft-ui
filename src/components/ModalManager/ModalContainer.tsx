@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import {
 	LayoutChangeEvent,
+	LayoutRectangle,
 	StyleSheet,
 	TouchableWithoutFeedback,
 	View,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
 
 export const ModalContainer: FC<Props> = ({ item }) => {
 	const { component: InnerComponent, bindingRectangle } = item;
+	const layout = useRef<LayoutRectangle>();
 	const top = useSharedValue(0);
 	const left = useSharedValue(0);
 	const opacity = useSharedValue(0);
@@ -64,6 +66,11 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		opacity.value = withSpring(item.hide ? 0 : 1);
 	}, [item.hide]);
 
+	useEffect(() => {
+		if (!layout.current) return;
+		onInnerLayout({ nativeEvent: { layout: layout.current } } as never);
+	}, [bindingRectangle]);
+
 	const onInnerLayout = ({ nativeEvent }: LayoutChangeEvent) => {
 		const calculatedRectangle = rectangleBind(
 			bindingRectangle as never,
@@ -71,6 +78,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 			item.bindingDirection,
 		);
 
+		layout.current = nativeEvent.layout;
 		top.value = calculatedRectangle.y;
 		left.value = calculatedRectangle.x;
 	};
