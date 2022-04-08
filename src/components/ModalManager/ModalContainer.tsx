@@ -16,7 +16,7 @@ import Animated, {
 
 import { modalActions, ModalConfigs } from '../../utils/store/modal';
 
-import { rectangleBind } from './shared';
+import { rectangleAnimatedStyle, rectangleBind } from './shared';
 
 interface Props {
 	item: ModalConfigs;
@@ -53,13 +53,13 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	}));
 
 	const wrapperStyle = useAnimatedStyle(() => {
-		return {
+		return rectangleAnimatedStyle(opacity, item.animateDirection, {
 			position: 'absolute',
+			overflow: 'hidden',
 			top: top.value,
 			left: left.value,
 			opacity: opacity.value,
-			transform: [{ translateY: interpolate(opacity.value, [0, 1], [20, 0]) }],
-		};
+		});
 	}, []);
 
 	useEffect(() => {

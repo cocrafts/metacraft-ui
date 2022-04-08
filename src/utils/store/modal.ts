@@ -26,10 +26,23 @@ export enum BindDirections {
 	InnerRight,
 }
 
+export enum AnimateDirections {
+	Top,
+	TopLeft,
+	TopRight,
+	Bottom,
+	BottomLeft,
+	BottomRight,
+	Left,
+	Right,
+	Inner,
+}
+
 export interface ModalConfigs {
 	id?: string;
 	bindingRectangle?: LayoutRectangle;
 	bindingDirection?: BindDirections;
+	animateDirection?: AnimateDirections;
 	component: FunctionComponent;
 	hide?: boolean;
 }
