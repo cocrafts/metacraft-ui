@@ -44,10 +44,14 @@ export interface ModalConfigs {
 	bindingDirection?: BindDirections;
 	animateDirection?: AnimateDirections;
 	component: FunctionComponent;
+	withoutMask?: boolean;
 	hide?: boolean;
 }
 
-export type ShowModalConfigs = Omit<ModalConfigs, 'bindingRectangle'> & {
+export type ShowModalConfigs = Omit<
+	ModalConfigs,
+	'bindingRectangle' | 'hide'
+> & {
 	bindingRef?: RefObject<View>;
 };
 
@@ -102,6 +106,7 @@ export const modalActions = {
 		});
 	},
 	hide: (id: string): void => {
-		modalState.hashmap[id].hide = true;
+		const instance = modalState.hashmap[id];
+		if (instance) instance.hide = true;
 	},
 };

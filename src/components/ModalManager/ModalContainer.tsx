@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
 });
 
 export const ModalContainer: FC<Props> = ({ item }) => {
-	const { component: InnerComponent, bindingRectangle } = item;
+	const { component: InnerComponent, bindingRectangle, withoutMask } = item;
 	const layout = useRef<LayoutRectangle>();
 	const top = useSharedValue(0);
 	const left = useSharedValue(0);
 	const opacity = useSharedValue(0);
-	const pointerEvents = item.hide ? 'none' : 'auto';
+	const pointerEvents = item.hide || withoutMask ? 'none' : 'auto';
 
 	const maskStyle = useAnimatedStyle(() => ({
 		opacity: interpolate(opacity.value, [0, 1], [0, 0.3], Extrapolate.CLAMP),
@@ -89,9 +89,11 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 
 	return (
 		<View pointerEvents={pointerEvents} style={styles.container}>
-			<TouchableWithoutFeedback onPress={closeModal}>
-				<Animated.View style={[styles.mask, maskStyle]} />
-			</TouchableWithoutFeedback>
+			{!withoutMask && (
+				<TouchableWithoutFeedback onPress={closeModal}>
+					<Animated.View style={[styles.mask, maskStyle]} />
+				</TouchableWithoutFeedback>
+			)}
 			<Animated.View onLayout={onInnerLayout} style={wrapperStyle}>
 				<InnerComponent />
 			</Animated.View>
