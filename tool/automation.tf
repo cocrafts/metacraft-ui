@@ -11,18 +11,18 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "storm-terraform-states"
+    bucket = "metacraft-terraform-states"
     key = "metacraft-ui"
-    region = "ap-southeast-1"
+    region = "ap-northeast-1"
   }
 }
 
 provider "aws" {
-  region = "ap-southeast-1"
+  region = "ap-northeast-1"
 }
 
 locals {
-  originId = "ui-kit-s3"
+  originId = "metacraft-ui-s3"
 }
 
 resource "aws_s3_bucket" "app" {

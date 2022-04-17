@@ -2,8 +2,14 @@
 #
 .DS_Store
 
+# Wings and other local stuffs
 wings/
 lib/
+
+# Terraform automations
+/*.tf
+.terraform
+.terraform.lock.hcl
 
 # Xcode
 #
