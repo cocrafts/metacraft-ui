@@ -6736,11 +6736,6 @@ react-native-gradle-plugin@^0.0.5:
   dependencies:
     react-native-codegen "*"
 
-react-native-linear-gradient@^2.5.6:
-  version "2.5.6"
-  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
-  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
-
 react-native-reanimated@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.8.0.tgz#93c06ca84d91fb3865110b0857c49a24e316130e"
@@ -7994,10 +7989,10 @@ v8-to-istanbul@^8.1.0:
     convert-source-map "^1.6.0"
     source-map "^0.7.3"
 
-valtio@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/valtio/-/valtio-1.5.2.tgz#8dbd3e08e23891713fd55ac1a7b1e91f14cfab47"
-  integrity sha512-4oqGO+7xSKZJJgLsfwRdzQxxy4hiOjiE0IZv0xoNNLtJQ+Y6mtWoEl0Y0JyUCrU/HBmY+0W/yL3lwjrpTBCJ/w==
+valtio@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/valtio/-/valtio-1.6.0.tgz#37332b2a937ceab4cb8a500c50063add600032b8"
+  integrity sha512-I/AUMRGlGpskbTdwYbiJutMKq4AHPgV8GWMwvPPQ6jdAhlWO4gheK4bTKZ22Ff5ONXjjZE8mQ0vL5l0em4wJGg==
   dependencies:
     proxy-compare "2.1.0"
     use-sync-external-store "1.0.0"
