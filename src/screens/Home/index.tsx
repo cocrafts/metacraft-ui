@@ -10,6 +10,11 @@ import {
 import Popup from './Popup';
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 	buttonContainer: {
 		marginTop: 20,
 	},
@@ -28,9 +33,9 @@ export const HomeScreen: FC = () => {
 	};
 
 	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<View ref={containerRef}>
-				<Text>Welcome to Metacraft UI</Text>
+		<View style={styles.container}>
+			<View ref={containerRef} style={{ width: 20 }}>
+				<Text>W</Text>
 			</View>
 			<Text>
 				Still too early to have something to show.. but this going to be fun!

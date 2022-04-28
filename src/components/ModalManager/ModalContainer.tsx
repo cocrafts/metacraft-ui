@@ -14,9 +14,12 @@ import Animated, {
 	withSpring,
 } from 'react-native-reanimated';
 
-import { modalActions, ModalConfigs } from '../../utils/store/modal';
-
-import { rectangleAnimatedStyle, rectangleBind } from './shared';
+import {
+	modalActions,
+	ModalConfigs,
+	rectangleAnimatedStyle,
+	rectangleBind,
+} from '../../utils/store/modal';
 
 interface Props {
 	item: ModalConfigs;
@@ -71,8 +74,8 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		onInnerLayout({ nativeEvent: { layout: layout.current } } as never);
 	}, [bindingRectangle]);
 
-	const onInnerLayout = ({ nativeEvent }: LayoutChangeEvent) => {
-		const calculatedRectangle = rectangleBind(
+	const onInnerLayout = async ({ nativeEvent }: LayoutChangeEvent) => {
+		const calculatedRectangle = await rectangleBind(
 			bindingRectangle as never,
 			nativeEvent.layout,
 			item.bindingDirection,
