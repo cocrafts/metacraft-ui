@@ -67,27 +67,38 @@ export const modalState = proxy<ModalState>({
 	hashmap: {},
 });
 
-const measureLayout = (
+const measure = async (viewRef: RefObject<View>): Promise<LayoutRectangle> =>
+	new Promise((resolve) => {
+		/* for Android, measure method won't behave well without collapsable = false */
+		viewRef.current?.setNativeProps({ collapsable: false });
+
+		setTimeout(() => {
+			/* <-- at this point in time, collapsable = false must be ready/configured correctly */
+			viewRef.current?.measure((x, y, width, height, px, py) => {
+				resolve({ x: px, y: py, width, height });
+			});
+		}, 0);
+	});
+
+const measureRelative = async (
 	targetRef?: RefObject<View>,
 ): Promise<LayoutRectangle | undefined> => {
 	if (!targetRef?.current) {
-		const { width, height } = Dimensions.get('window');
+		/* <-- if there is no target, assume relative measure to device screen */
+		const { width, height } = Dimensions.get('screen');
 		return Promise.resolve({ x: 0, y: 0, width, height });
 	}
 
-	return new Promise((resolve, reject) => {
-		targetRef.current?.measureLayout(
-			referenceMap.root.current as never,
-			(x, y, width, height) =>
-				resolve({
-					x,
-					y,
-					width,
-					height,
-				}),
-			() => reject(),
-		);
-	});
+	/* compute relative position with referenceMap.root */
+	const rootLayout = await measure(referenceMap.root);
+	const targetLayout = await measure(targetRef);
+
+	return {
+		x: targetLayout.x - rootLayout.x,
+		y: targetLayout.y - rootLayout.y,
+		width: targetLayout.width,
+		height: targetLayout.height,
+	};
 };
 
 export const modalActions = {
@@ -97,7 +108,7 @@ export const modalActions = {
 	show: ({ id, bindingRef, ...restConfigs }: ShowModalConfigs): void => {
 		const safeId = id || 'default-modal';
 
-		measureLayout(bindingRef).then((layout) => {
+		measureRelative(bindingRef).then((layout) => {
 			modalState.hashmap[safeId] = {
 				id: safeId,
 				bindingRectangle: layout,
