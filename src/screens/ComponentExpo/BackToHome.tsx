@@ -8,7 +8,7 @@ export const BackToHome: FC = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}>Welcome to Animation screen!</Text>
+			<Text style={styles.text}>Welcome to Expo screen!</Text>
 			<Text style={styles.text}>Slide to the right and enjoy the show</Text>
 			<Button
 				style={styles.button}
