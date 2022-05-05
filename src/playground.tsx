@@ -5,6 +5,7 @@ import {
 	StackNavigationOptions,
 } from '@react-navigation/stack';
 import Provider from 'components/Provider';
+import Animation from 'screens/Animation';
 import Home from 'screens/Home';
 import { linking } from 'utils/routes';
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ export const Playground: FC = () => {
 			<NavigationContainer linking={linking}>
 				<Stack.Navigator screenOptions={screenOptions}>
 					<Stack.Screen name="Home" component={Home} />
+					<Stack.Screen name="Animation" component={Animation} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
