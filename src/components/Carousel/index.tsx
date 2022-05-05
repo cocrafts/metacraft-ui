@@ -10,15 +10,15 @@ interface Props {
 export const Carousel: FC<Props> = ({ children }) => {
 	return (
 		<View style={styles.container}>
-			<View>
+			<View style={styles.container}>
 				{children.map((child, index) => (
 					<View key={index}>{child}</View>
 				))}
 			</View>
-			<View style={styles.prevButton}>
+			<View style={[styles.prevButton, styles.button]}>
 				<Button title={'Prev'} />
 			</View>
-			<View style={styles.nextButton}>
+			<View style={[styles.nextButton, styles.button]}>
 				<Button title={'Next'} />
 			</View>
 		</View>
@@ -28,21 +28,20 @@ export const Carousel: FC<Props> = ({ children }) => {
 export default Carousel;
 const styles = StyleSheet.create({
 	container: {
-		width: '100%',
-		height: '100%',
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	button: {
+		position: 'absolute',
+		top: 0,
+		bottom: 0,
+		justifyContent: 'center',
 	},
 	prevButton: {
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
 		left: 10,
-		justifyContent: 'center',
 	},
 	nextButton: {
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
-		left: 10,
-		justifyContent: 'center',
+		right: 10,
 	},
 });

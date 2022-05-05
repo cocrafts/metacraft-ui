@@ -1,5 +1,6 @@
 import React, { FC, useRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useLinkTo } from '@react-navigation/native';
 import Button from 'components/Button';
 import {
 	AnimateDirections,
@@ -31,6 +32,7 @@ export const HomeScreen: FC = () => {
 			bindingRef: containerRef,
 		});
 	};
+	const linkTo = useLinkTo();
 
 	return (
 		<View style={styles.container}>
@@ -41,6 +43,11 @@ export const HomeScreen: FC = () => {
 				Still too early to have something to show.. but this going to be fun!
 			</Text>
 			<Button style={styles.buttonContainer} onPress={showPopup} />
+			<Button
+				title={'Go to Animation screen'}
+				style={styles.buttonContainer}
+				onPress={() => linkTo('/animation')}
+			/>
 		</View>
 	);
 };
