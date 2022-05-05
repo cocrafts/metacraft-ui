@@ -44,9 +44,9 @@ export const HomeScreen: FC = () => {
 			</Text>
 			<Button style={styles.buttonContainer} onPress={showPopup} />
 			<Button
-				title={'Go to Animation screen'}
+				title={'Go to Expo screen'}
 				style={styles.buttonContainer}
-				onPress={() => linkTo('/animation')}
+				onPress={() => linkTo('/expo')}
 			/>
 		</View>
 	);
