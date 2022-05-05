@@ -36,10 +36,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Generate Terraform script
-        run: yarn gen ${GITHUB_REF##*/}
-        if: github.ref == 'refs/heads/master'
-
       - name: Eslint validation
         run: yarn lint
 
@@ -48,6 +44,10 @@ jobs:
         if: github.ref == 'refs/heads/master'
         env:
           PUBLIC_URL: /${{ steps.branch.outputs.BRANCH_NAME }}/
+
+      - name: Generate Terraform script
+        run: yarn gen ${GITHUB_REF##*/}
+        if: github.ref == 'refs/heads/master'
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
