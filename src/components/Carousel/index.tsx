@@ -1,14 +1,13 @@
-import React, { FC, ReactChild } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Button from 'components/Button';
 
-interface PropType {
-	children: ReactChild[];
+import Button from '../Button';
+
+interface Props {
+	children: ReactNode[];
 }
 
-export const Carousel: FC<PropType> = (props: PropType) => {
-	const { children } = props;
-
+export const Carousel: FC<Props> = ({ children }) => {
 	return (
 		<View style={styles.container}>
 			<View>
@@ -26,6 +25,7 @@ export const Carousel: FC<PropType> = (props: PropType) => {
 	);
 };
 
+export default Carousel;
 const styles = StyleSheet.create({
 	container: {
 		width: '100%',
