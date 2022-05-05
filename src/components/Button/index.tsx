@@ -23,18 +23,6 @@ interface Props {
 	onPress?: () => void;
 }
 
-const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#3397fc',
-		borderRadius: 5,
-		paddingVertical: 12,
-		paddingHorizontal: 18,
-	},
-	title: {
-		color: '#FFFFFF',
-	},
-});
-
 export const Button: FC<Props> = ({
 	style,
 	useHoveredStyle = useDefaultHoveredStyle,
@@ -55,3 +43,15 @@ export const Button: FC<Props> = ({
 };
 
 export default Button;
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: '#3397fc',
+		borderRadius: 5,
+		paddingVertical: 12,
+		paddingHorizontal: 18,
+	},
+	title: {
+		color: '#FFFFFF',
+	},
+});
