@@ -1,4 +1,4 @@
-name: Release on CloudFront
+name: Validate and release (if possible)
 on:
   push:
     branches:
