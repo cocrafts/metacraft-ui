@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import {
-	GestureHandlerRootView,
 	PanGestureHandler,
+	PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
 	useAnimatedGestureHandler,
@@ -24,6 +24,7 @@ type AnimatedContext = {
 export const Carousel: FC<Props> = ({ children }) => {
 	const transformHorizontal = useSharedValue(0);
 	const containerWidth = useSharedValue(0);
+	const childrenLength = useSharedValue(children.length);
 
 	const carouselAnimated = useAnimatedStyle(() => {
 		return {
@@ -43,14 +44,17 @@ export const Carousel: FC<Props> = ({ children }) => {
 
 		if (
 			value > 0 &&
-			transformHorizontal.value < (children.length - 1) * value
+			transformHorizontal.value < (childrenLength.value - 1) * value
 		) {
 			transformHorizontal.value += containerWidth.value;
 		}
 	};
 
-	const gestureHandler = useAnimatedGestureHandler({
-		onStart: (_, ctx: AnimatedContext) => {
+	const gestureHandler = useAnimatedGestureHandler<
+		PanGestureHandlerGestureEvent,
+		AnimatedContext
+	>({
+		onStart: (_, ctx) => {
 			ctx.startPosition = transformHorizontal.value;
 		},
 		onActive: (event, ctx) => {
@@ -60,15 +64,20 @@ export const Carousel: FC<Props> = ({ children }) => {
 			const changeWidth = transformHorizontal.value - ctx.startPosition;
 			const percentWidthChange = 25;
 
+			// Stop swiping to the left at the first slide
 			if (transformHorizontal.value < 0) {
 				transformHorizontal.value = 0;
-			} else if (
+			}
+			// Stop swiping to the right at the last slide
+			else if (
 				transformHorizontal.value >
-				(children.length - 1) * containerWidth.value
+				(childrenLength.value - 1) * containerWidth.value
 			) {
 				transformHorizontal.value =
-					(children.length - 1) * containerWidth.value;
-			} else {
+					(childrenLength.value - 1) * containerWidth.value;
+			}
+			// Handle change slide if swipe more than 25% width of container, change back to current slide if less than 25%
+			else {
 				if (
 					changeWidth > 0 &&
 					(changeWidth / containerWidth.value) * 100 > percentWidthChange
