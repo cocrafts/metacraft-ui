@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export const ShowModal: FC = () => {
 	return (
 		<View style={styles.container}>
-			<Text>ShowModal</Text>
+			<Text style={styles.text}>ShowModal</Text>
 		</View>
 	);
 };
@@ -16,5 +16,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	text: {
+		color: '#000000',
 	},
 });
