@@ -1,6 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
+import {
+	GestureHandlerRootView,
+	PanGestureHandler,
+} from 'react-native-gesture-handler';
 import Animated, {
+	useAnimatedGestureHandler,
 	useAnimatedStyle,
 	useSharedValue,
 	withSpring,
@@ -12,8 +17,13 @@ interface Props {
 	children: ReactNode[];
 }
 
+type AnimatedContext = {
+	startPosition: number;
+};
+
 export const Carousel: FC<Props> = ({ children }) => {
 	const transformHorizontal = useSharedValue(0);
+	const containerWidth = useSharedValue(0);
 
 	const carouselAnimated = useAnimatedStyle(() => {
 		return {
@@ -21,41 +31,88 @@ export const Carousel: FC<Props> = ({ children }) => {
 		};
 	});
 
-	let containerWidth: number;
-
 	const measureCarouselContainer = (event: LayoutChangeEvent) => {
 		const { width } = event.nativeEvent.layout;
-		containerWidth = width;
+		containerWidth.value = width;
 	};
 
 	const slideOnPress = (value: number) => {
 		if (value < 0 && transformHorizontal.value > 0) {
-			transformHorizontal.value -= containerWidth;
+			transformHorizontal.value -= containerWidth.value;
 		}
 
-		if (value > 0 && transformHorizontal.value < children.length - 1) {
-			transformHorizontal.value += containerWidth;
+		if (
+			value > 0 &&
+			transformHorizontal.value < (children.length - 1) * value
+		) {
+			transformHorizontal.value += containerWidth.value;
 		}
 	};
 
+	const gestureHandler = useAnimatedGestureHandler({
+		onStart: (_, ctx: AnimatedContext) => {
+			ctx.startPosition = transformHorizontal.value;
+		},
+		onActive: (event, ctx) => {
+			transformHorizontal.value = ctx.startPosition - event.translationX;
+		},
+		onEnd: (_, ctx) => {
+			const changeWidth = transformHorizontal.value - ctx.startPosition;
+			const percentWidthChange = 25;
+
+			if (transformHorizontal.value < 0) {
+				transformHorizontal.value = 0;
+			} else if (
+				transformHorizontal.value >
+				(children.length - 1) * containerWidth.value
+			) {
+				transformHorizontal.value =
+					(children.length - 1) * containerWidth.value;
+			} else {
+				if (
+					changeWidth > 0 &&
+					(changeWidth / containerWidth.value) * 100 > percentWidthChange
+				) {
+					ctx.startPosition += containerWidth.value;
+				} else if (
+					changeWidth < 0 &&
+					Math.abs((changeWidth / containerWidth.value) * 100) >
+						percentWidthChange
+				) {
+					ctx.startPosition -= containerWidth.value;
+				}
+				transformHorizontal.value = ctx.startPosition;
+			}
+		},
+	});
+
 	return (
 		<View style={styles.container}>
-			<Animated.View
-				style={[styles.carouselContainer, carouselAnimated]}
-				// Measure carousel container width when View resize
-				onLayout={measureCarouselContainer}
-			>
-				{children.map((child, index) => (
-					<View style={styles.slideContainer} key={index}>
-						{child}
-					</View>
-				))}
-			</Animated.View>
+			<PanGestureHandler onGestureEvent={gestureHandler}>
+				<Animated.View
+					style={[styles.carouselContainer, carouselAnimated]}
+					// Measure carousel container width when View resize
+					onLayout={measureCarouselContainer}
+				>
+					{children.map((child, index) => (
+						<View style={styles.slideContainer} key={index}>
+							{child}
+						</View>
+					))}
+				</Animated.View>
+			</PanGestureHandler>
+
 			<View style={[styles.prevButton, styles.button]}>
-				<Button title={'Prev'} onPress={() => slideOnPress(-containerWidth)} />
+				<Button
+					title={'Prev'}
+					onPress={() => slideOnPress(-containerWidth.value)}
+				/>
 			</View>
 			<View style={[styles.nextButton, styles.button]}>
-				<Button title={'Next'} onPress={() => slideOnPress(containerWidth)} />
+				<Button
+					title={'Next'}
+					onPress={() => slideOnPress(containerWidth.value)}
+				/>
 			</View>
 		</View>
 	);
