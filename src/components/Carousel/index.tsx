@@ -1,15 +1,12 @@
 import React, { FC, ReactNode } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import {
-<<<<<<< HEAD
 	PanGestureHandler,
 	PanGestureHandlerGestureEvent,
-=======
-	GestureHandlerRootView,
-	PanGestureHandler,
->>>>>>> 98a5a4e745346bd042a9319aead9b300d16e336f
 } from 'react-native-gesture-handler';
 import Animated, {
+	runOnJS,
+	runOnUI,
 	useAnimatedGestureHandler,
 	useAnimatedStyle,
 	useSharedValue,
@@ -29,14 +26,11 @@ type AnimatedContext = {
 export const Carousel: FC<Props> = ({ children }) => {
 	const transformHorizontal = useSharedValue(0);
 	const containerWidth = useSharedValue(0);
-<<<<<<< HEAD
 	const childrenLength = useSharedValue(children.length);
-=======
->>>>>>> 98a5a4e745346bd042a9319aead9b300d16e336f
 
 	const carouselAnimated = useAnimatedStyle(() => {
 		return {
-			transform: [{ translateX: withSpring(-transformHorizontal.value) }],
+			transform: [{ translateX: -transformHorizontal.value }],
 		};
 	});
 
@@ -47,31 +41,25 @@ export const Carousel: FC<Props> = ({ children }) => {
 
 	const slideOnPress = (value: number) => {
 		if (value < 0 && transformHorizontal.value > 0) {
-			transformHorizontal.value -= containerWidth.value;
+			transformHorizontal.value = withSpring(
+				transformHorizontal.value - containerWidth.value,
+			);
 		}
-
 		if (
 			value > 0 &&
-<<<<<<< HEAD
 			transformHorizontal.value < (childrenLength.value - 1) * value
-=======
-			transformHorizontal.value < (children.length - 1) * value
->>>>>>> 98a5a4e745346bd042a9319aead9b300d16e336f
 		) {
-			transformHorizontal.value += containerWidth.value;
+			transformHorizontal.value = withSpring(
+				transformHorizontal.value + containerWidth.value,
+			);
 		}
 	};
 
-<<<<<<< HEAD
 	const gestureHandler = useAnimatedGestureHandler<
 		PanGestureHandlerGestureEvent,
 		AnimatedContext
 	>({
 		onStart: (_, ctx) => {
-=======
-	const gestureHandler = useAnimatedGestureHandler({
-		onStart: (_, ctx: AnimatedContext) => {
->>>>>>> 98a5a4e745346bd042a9319aead9b300d16e336f
 			ctx.startPosition = transformHorizontal.value;
 		},
 		onActive: (event, ctx) => {
@@ -81,32 +69,21 @@ export const Carousel: FC<Props> = ({ children }) => {
 			const changeWidth = transformHorizontal.value - ctx.startPosition;
 			const percentWidthChange = 25;
 
-<<<<<<< HEAD
 			// Stop swiping to the left at the first slide
 			if (transformHorizontal.value < 0) {
-				transformHorizontal.value = 0;
+				transformHorizontal.value = withSpring(0);
 			}
 			// Stop swiping to the right at the last slide
 			else if (
 				transformHorizontal.value >
 				(childrenLength.value - 1) * containerWidth.value
 			) {
-				transformHorizontal.value =
-					(childrenLength.value - 1) * containerWidth.value;
+				transformHorizontal.value = withSpring(
+					(childrenLength.value - 1) * containerWidth.value,
+				);
 			}
 			// Handle change slide if swipe more than 25% width of container, change back to current slide if less than 25%
 			else {
-=======
-			if (transformHorizontal.value < 0) {
-				transformHorizontal.value = 0;
-			} else if (
-				transformHorizontal.value >
-				(children.length - 1) * containerWidth.value
-			) {
-				transformHorizontal.value =
-					(children.length - 1) * containerWidth.value;
-			} else {
->>>>>>> 98a5a4e745346bd042a9319aead9b300d16e336f
 				if (
 					changeWidth > 0 &&
 					(changeWidth / containerWidth.value) * 100 > percentWidthChange
@@ -119,7 +96,7 @@ export const Carousel: FC<Props> = ({ children }) => {
 				) {
 					ctx.startPosition -= containerWidth.value;
 				}
-				transformHorizontal.value = ctx.startPosition;
+				transformHorizontal.value = withSpring(ctx.startPosition);
 			}
 		},
 	});
