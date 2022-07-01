@@ -29,6 +29,9 @@ export const HomeScreen: FC = () => {
 			bindingDirection: BindDirections.Top,
 			animateDirection: AnimateDirections.TopRight,
 			bindingRef: containerRef,
+			maskStyle: {
+				backgroundColor: 'transparent',
+			},
 			positionOffset: {
 				x: 0,
 				y: 8,

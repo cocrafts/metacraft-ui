@@ -1,5 +1,5 @@
 import { FunctionComponent, RefObject } from 'react';
-import { LayoutRectangle, View } from 'react-native';
+import { LayoutRectangle, View, ViewStyle } from 'react-native';
 
 export enum BindDirections {
 	Top,
@@ -49,6 +49,7 @@ export interface ModalConfigs {
 	animateDirection?: AnimateDirections;
 	component: FunctionComponent;
 	positionOffset?: PositionOffset;
+	maskStyle?: ViewStyle;
 	withoutMask?: boolean;
 	hide?: boolean;
 }
