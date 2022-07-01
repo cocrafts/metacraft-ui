@@ -44,7 +44,12 @@ const styles = StyleSheet.create({
 });
 
 export const ModalContainer: FC<Props> = ({ item }) => {
-	const { component: InnerComponent, bindingRectangle, withoutMask } = item;
+	const {
+		component: InnerComponent,
+		bindingRectangle,
+		positionOffset,
+		withoutMask,
+	} = item;
 	const layout = useRef<LayoutRectangle>();
 	const top = useSharedValue(0);
 	const left = useSharedValue(0);
@@ -79,6 +84,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 			bindingRectangle as never,
 			nativeEvent.layout,
 			item.bindingDirection,
+			positionOffset,
 		);
 
 		layout.current = nativeEvent.layout;

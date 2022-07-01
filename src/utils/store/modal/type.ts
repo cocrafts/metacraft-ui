@@ -37,12 +37,18 @@ export enum AnimateDirections {
 	Inner,
 }
 
+export interface PositionOffset {
+	x?: number;
+	y?: number;
+}
+
 export interface ModalConfigs {
 	id?: string;
 	bindingRectangle?: LayoutRectangle;
 	bindingDirection?: BindDirections;
 	animateDirection?: AnimateDirections;
 	component: FunctionComponent;
+	positionOffset?: PositionOffset;
 	withoutMask?: boolean;
 	hide?: boolean;
 }

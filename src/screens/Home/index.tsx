@@ -29,6 +29,10 @@ export const HomeScreen: FC = () => {
 			bindingDirection: BindDirections.Top,
 			animateDirection: AnimateDirections.TopRight,
 			bindingRef: containerRef,
+			positionOffset: {
+				x: 0,
+				y: 8,
+			},
 		});
 	};
 
