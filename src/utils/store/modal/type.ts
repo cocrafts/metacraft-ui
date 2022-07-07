@@ -47,11 +47,12 @@ export interface ModalConfigs {
 	bindingRectangle?: LayoutRectangle;
 	bindingDirection?: BindDirections;
 	animateDirection?: AnimateDirections;
-	component: FunctionComponent;
+	component: FunctionComponent<{ config: ModalConfigs }>;
 	positionOffset?: PositionOffset;
 	maskStyle?: ViewStyle;
 	withoutMask?: boolean;
 	hide?: boolean;
+	context?: unknown;
 }
 
 export type ShowModalConfigs = Omit<

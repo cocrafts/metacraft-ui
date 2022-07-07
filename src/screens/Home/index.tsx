@@ -36,6 +36,7 @@ export const HomeScreen: FC = () => {
 				x: 0,
 				y: 8,
 			},
+			context: { name: 'Cloud' },
 		});
 	};
 

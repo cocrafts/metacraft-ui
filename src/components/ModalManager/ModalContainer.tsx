@@ -105,7 +105,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 				</TouchableWithoutFeedback>
 			)}
 			<Animated.View onLayout={onInnerLayout} style={wrapperStyle}>
-				<InnerComponent />
+				<InnerComponent config={item} />
 			</Animated.View>
 		</View>
 	);
