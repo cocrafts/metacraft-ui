@@ -26,7 +26,7 @@ export const measureRelative = async (
 ): Promise<LayoutRectangle | undefined> => {
 	if (!targetRef?.current) {
 		/* <-- if there is no target, assume relative measure to device screen */
-		const { width, height } = Dimensions.get('screen');
+		const { width, height } = Dimensions.get('window');
 		return Promise.resolve({ x: 0, y: 0, width, height });
 	}
 
