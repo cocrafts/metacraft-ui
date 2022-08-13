@@ -50,6 +50,7 @@ export interface ModalConfigs {
 	component: FunctionComponent<{ config: ModalConfigs }>;
 	positionOffset?: PositionOffset;
 	maskStyle?: ViewStyle;
+	maskActiveOpacity?: number;
 	withoutMask?: boolean;
 	hide?: boolean;
 	context?: unknown;
