@@ -12,9 +12,9 @@ import Animated, {
 	withSpring,
 } from 'react-native-reanimated';
 import { getLuminance } from 'color2k';
-import { ThemeState, themeState } from 'utils/state/theme';
 import { useSnapshot } from 'valtio';
 
+import { ThemeState, themeState } from '../../utils/state/theme';
 import Hoverable from '../Hoverable';
 import Text from '../Text';
 

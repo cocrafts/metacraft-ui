@@ -1,6 +1,7 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from 'components/Button';
+import Checkbox from 'components/Checkbox';
 import Hyperlink from 'components/Hyperlink';
 import Text from 'components/Text';
 import {
@@ -14,6 +15,7 @@ import { useSnapshot } from 'valtio';
 import Popup from './Popup';
 
 export const HomeScreen: FC = () => {
+	const [checked, setChecked] = useState(true);
 	const containerRef = useRef<View>(null);
 	const { colors } = useSnapshot(themeState);
 	const containerStyle = { backgroundColor: colors.background };
@@ -38,15 +40,20 @@ export const HomeScreen: FC = () => {
 
 	return (
 		<View style={[styles.container, containerStyle]}>
-			<View ref={containerRef} style={{ width: 20 }}>
-				<Text>W</Text>
+			<View ref={containerRef}>
+				<Text>Referenced Area</Text>
 			</View>
-			<Hyperlink title="Still too early to have something to show.. but this going to be fun!" />
+			<Hyperlink title="A link should notify itself as interact-able when hovered!" />
 			<Button
 				outline
 				style={styles.buttonContainer}
 				onPress={showPopup}
 				title="Show popup"
+			/>
+			<Checkbox
+				style={{ marginTop: 20 }}
+				selected={checked}
+				onSelect={(val) => setChecked(val)}
 			/>
 		</View>
 	);

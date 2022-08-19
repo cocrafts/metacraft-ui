@@ -11,8 +11,9 @@ import Animated, {
 	useAnimatedStyle,
 	withSpring,
 } from 'react-native-reanimated';
-import { ThemeState, themeState } from 'utils/state/theme';
 import { useSnapshot } from 'valtio';
+
+import { ThemeState, themeState } from '../utils/state/theme';
 
 import Hoverable from './Hoverable';
 import Text from './Text';
