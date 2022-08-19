@@ -1,6 +1,7 @@
 import { defaultRules, ParserRules } from 'simple-markdown';
 
 import checkList from './checkList';
+import del from './del';
 import heading from './heading';
 import paragraph from './paragraph';
 import strong from './strong';
@@ -11,6 +12,7 @@ const rules: ParserRules = {
 	paragraph,
 	text,
 	strong,
+	del,
 	heading,
 	checkList,
 };
