@@ -9,6 +9,7 @@ export interface ThemeColors {
 	primary: string;
 	background: string;
 	text: string;
+	link: string;
 	alt: string;
 }
 
@@ -24,6 +25,7 @@ export const themeState = proxy<ThemeState>({
 		primary: '#2C879B',
 		background: '#002E46',
 		text: '#FFFFFF',
+		link: '#2C879B',
 		alt: '#FFFFFF',
 	},
 	sizes: {

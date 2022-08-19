@@ -1,6 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from 'components/Button';
+import Hyperlink from 'components/Hyperlink';
 import Text from 'components/Text';
 import {
 	AnimateDirections,
@@ -40,9 +41,7 @@ export const HomeScreen: FC = () => {
 			<View ref={containerRef} style={{ width: 20 }}>
 				<Text>W</Text>
 			</View>
-			<Text>
-				Still too early to have something to show.. but this going to be fun!
-			</Text>
+			<Hyperlink title="Still too early to have something to show.. but this going to be fun!" />
 			<Button
 				outline
 				style={styles.buttonContainer}
