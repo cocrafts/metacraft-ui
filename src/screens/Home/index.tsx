@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import Hyperlink from 'components/Hyperlink';
+import Markdown from 'components/Markdown';
 import Text from 'components/Text';
 import {
 	AnimateDirections,
@@ -55,6 +56,10 @@ export const HomeScreen: FC = () => {
 				selected={checked}
 				onSelect={(val) => setChecked(val)}
 			/>
+			<Markdown
+				style={styles.markdownContainer}
+				content="this is a **universal markdown** area!"
+			/>
 		</View>
 	);
 };
@@ -68,6 +73,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	buttonContainer: {
+		marginTop: 20,
+	},
+	markdownContainer: {
+		backgroundColor: 'white',
+		padding: 18,
+		borderRadius: 8,
 		marginTop: 20,
 	},
 });
