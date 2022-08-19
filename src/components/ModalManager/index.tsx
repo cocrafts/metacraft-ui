@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSnapshot } from 'valtio';
 
-import { ModalConfigs, ModalState, modalState } from '../../utils/store/modal';
+import { ModalConfigs, ModalState, modalState } from '../../utils/state/modal';
 
 import ModalContainer from './ModalContainer';
 

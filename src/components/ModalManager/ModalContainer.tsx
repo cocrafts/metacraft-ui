@@ -19,7 +19,7 @@ import {
 	ModalConfigs,
 	rectangleAnimatedStyle,
 	rectangleBind,
-} from '../../utils/store/modal';
+} from '../../utils/state/modal';
 
 interface Props {
 	item: ModalConfigs;

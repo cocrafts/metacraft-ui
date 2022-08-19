@@ -5,7 +5,7 @@ import {
 	AnimateDirections,
 	BindDirections,
 	modalActions,
-} from 'utils/store/modal';
+} from 'utils/state/modal';
 
 import Popup from './Popup';
 

@@ -1,7 +1,7 @@
 import React, { FC, ReactChild, useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { modalActions } from '../utils/store/modal';
+import { modalActions } from '../utils/state/modal';
 
 import ModalManager from './ModalManager';
 
