@@ -55,6 +55,9 @@ module.exports = {
 	settings: {
 		react: { version: 'detect' },
 	},
+	env: {
+		node: true,
+	},
 	globals: {
 		module: true,
 		require: true,

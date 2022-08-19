@@ -19,7 +19,7 @@ import {
 	ModalConfigs,
 	rectangleAnimatedStyle,
 	rectangleBind,
-} from '../../utils/store/modal';
+} from '../../utils/state/modal';
 
 interface Props {
 	item: ModalConfigs;
@@ -44,15 +44,27 @@ const styles = StyleSheet.create({
 });
 
 export const ModalContainer: FC<Props> = ({ item }) => {
-	const { component: InnerComponent, bindingRectangle, withoutMask } = item;
+	const {
+		component: InnerComponent,
+		bindingRectangle,
+		positionOffset,
+		maskStyle,
+		maskActiveOpacity = 0.5,
+		withoutMask,
+	} = item;
 	const layout = useRef<LayoutRectangle>();
 	const top = useSharedValue(0);
 	const left = useSharedValue(0);
 	const opacity = useSharedValue(0);
 	const pointerEvents = item.hide || withoutMask ? 'none' : 'auto';
 
-	const maskStyle = useAnimatedStyle(() => ({
-		opacity: interpolate(opacity.value, [0, 1], [0, 0.3], Extrapolate.CLAMP),
+	const maskAnimatedStyle = useAnimatedStyle(() => ({
+		opacity: interpolate(
+			opacity.value,
+			[0, 1],
+			[0, maskActiveOpacity],
+			Extrapolate.CLAMP,
+		),
 	}));
 
 	const wrapperStyle = useAnimatedStyle(() => {
@@ -79,6 +91,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 			bindingRectangle as never,
 			nativeEvent.layout,
 			item.bindingDirection,
+			positionOffset,
 		);
 
 		layout.current = nativeEvent.layout;
@@ -94,11 +107,11 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		<View pointerEvents={pointerEvents} style={styles.container}>
 			{!withoutMask && (
 				<TouchableWithoutFeedback onPress={closeModal}>
-					<Animated.View style={[styles.mask, maskStyle]} />
+					<Animated.View style={[styles.mask, maskAnimatedStyle, maskStyle]} />
 				</TouchableWithoutFeedback>
 			)}
 			<Animated.View onLayout={onInnerLayout} style={wrapperStyle}>
-				<InnerComponent />
+				<InnerComponent config={item} />
 			</Animated.View>
 		</View>
 	);

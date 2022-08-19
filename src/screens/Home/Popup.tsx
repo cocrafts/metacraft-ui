@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { ModalConfigs } from 'utils/store/modal';
 
 const styles = StyleSheet.create({
 	container: {
@@ -13,10 +14,17 @@ const styles = StyleSheet.create({
 	},
 });
 
-export const Popup: FC = () => {
+interface Props {
+	config: ModalConfigs;
+}
+
+export const Popup: FC<Props> = ({ config }) => {
+	const context = config.context as { name: string };
+
+	console.log(config.context);
 	return (
 		<View style={styles.container}>
-			<Text>Popup</Text>
+			<Text>{context.name}</Text>
 		</View>
 	);
 };

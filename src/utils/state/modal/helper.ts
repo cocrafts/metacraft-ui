@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 import { Dimensions, LayoutRectangle, View, ViewStyle } from 'react-native';
 import { interpolate, SharedValue } from 'react-native-reanimated';
 
-import { AnimateDirections, BindDirections } from './type';
+import { AnimateDirections, BindDirections, PositionOffset } from './type';
 
 export const referenceMap: Record<string, RefObject<View>> = {};
 
@@ -26,7 +26,7 @@ export const measureRelative = async (
 ): Promise<LayoutRectangle | undefined> => {
 	if (!targetRef?.current) {
 		/* <-- if there is no target, assume relative measure to device screen */
-		const { width, height } = Dimensions.get('screen');
+		const { width, height } = Dimensions.get('window');
 		return Promise.resolve({ x: 0, y: 0, width, height });
 	}
 
@@ -69,6 +69,7 @@ export const rectangleBind = async (
 	target: LayoutRectangle,
 	current: LayoutRectangle,
 	direction?: BindDirections,
+	offset?: PositionOffset,
 	padding = 8,
 ): Promise<LayoutRectangle> => {
 	const result: LayoutRectangle = {
@@ -136,6 +137,11 @@ export const rectangleBind = async (
 	} else if (direction === BindDirections.InnerRight) {
 		result.x = target.x + target.width - current.width - padding;
 		result.y = target.y + (target.height / 2 - current.height / 2);
+	}
+
+	if (offset) {
+		result.x += offset.x || 0;
+		result.y += offset.y || 0;
 	}
 
 	return guardRectangleInside(result, referenceMap.root);

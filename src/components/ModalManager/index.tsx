@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSnapshot } from 'valtio';
 
-import { modalState } from '../../utils/store/modal';
+import { ModalConfigs, ModalState, modalState } from '../../utils/state/modal';
 
 import ModalContainer from './ModalContainer';
 
@@ -17,13 +17,13 @@ const styles = StyleSheet.create({
 });
 
 export const ModalManager: FC = () => {
-	const { hashmap } = useSnapshot(modalState);
+	const { hashmap } = useSnapshot<ModalState>(modalState);
 	const instances = Object.values(hashmap);
 
 	return (
 		<View pointerEvents="box-none" style={styles.container}>
 			{instances.map((item) => {
-				return <ModalContainer key={item.id} item={item} />;
+				return <ModalContainer key={item.id} item={item as ModalConfigs} />;
 			})}
 		</View>
 	);

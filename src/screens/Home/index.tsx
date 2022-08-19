@@ -5,7 +5,7 @@ import {
 	AnimateDirections,
 	BindDirections,
 	modalActions,
-} from 'utils/store/modal';
+} from 'utils/state/modal';
 
 import Popup from './Popup';
 
@@ -29,6 +29,14 @@ export const HomeScreen: FC = () => {
 			bindingDirection: BindDirections.Top,
 			animateDirection: AnimateDirections.TopRight,
 			bindingRef: containerRef,
+			maskStyle: {
+				backgroundColor: 'transparent',
+			},
+			positionOffset: {
+				x: 0,
+				y: 8,
+			},
+			context: { name: 'Cloud' },
 		});
 	};
 
