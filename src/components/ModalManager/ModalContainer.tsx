@@ -49,6 +49,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		bindingRectangle,
 		positionOffset,
 		maskStyle,
+		maskActiveOpacity = 0.5,
 		withoutMask,
 	} = item;
 	const layout = useRef<LayoutRectangle>();
@@ -58,7 +59,12 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	const pointerEvents = item.hide || withoutMask ? 'none' : 'auto';
 
 	const maskAnimatedStyle = useAnimatedStyle(() => ({
-		opacity: interpolate(opacity.value, [0, 1], [0, 0.3], Extrapolate.CLAMP),
+		opacity: interpolate(
+			opacity.value,
+			[0, 1],
+			[0, maskActiveOpacity],
+			Extrapolate.CLAMP,
+		),
 	}));
 
 	const wrapperStyle = useAnimatedStyle(() => {
