@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Text, TextProps, TextStyle } from 'react-native';
+import { Text as DefaultText, TextProps, TextStyle } from 'react-native';
 import { useSnapshot } from 'valtio';
 
 import { dimensionState } from '../utils/state/dimension';
@@ -21,7 +21,7 @@ const LightText: FC<Props> = ({ style, ...otherProps }) => {
 	const { colors } = useSnapshot(themeState);
 	const dynamicStyle = [{ fontFamily: 'Poppins', color: colors.text }, style];
 
-	return <Text style={dynamicStyle} {...otherProps} />;
+	return <DefaultText style={dynamicStyle} {...otherProps} />;
 };
 
 const ScaledText: FC<Props> = ({ style, responsiveSizes, ...otherProps }) => {
@@ -40,10 +40,10 @@ const ScaledText: FC<Props> = ({ style, responsiveSizes, ...otherProps }) => {
 		style,
 	];
 
-	return <Text style={dynamicStyle} {...otherProps} />;
+	return <DefaultText style={dynamicStyle} {...otherProps} />;
 };
 
-export const SmartText: FC<Props> = ({ responsiveSizes, ...otherProps }) => {
+export const Text: FC<Props> = ({ responsiveSizes, ...otherProps }) => {
 	if (responsiveSizes) {
 		return <ScaledText responsiveSizes={responsiveSizes} {...otherProps} />;
 	}
@@ -51,7 +51,7 @@ export const SmartText: FC<Props> = ({ responsiveSizes, ...otherProps }) => {
 	return <LightText {...otherProps} />;
 };
 
-export default SmartText;
+export default Text;
 
 const extractSizes = (sizes: ScaledSizes, level: number) => {
 	for (let i = level; i >= 0; i -= 1) {
