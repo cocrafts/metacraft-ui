@@ -16,20 +16,15 @@ export const heading: ParserRule & ReactOutputRule = {
 		const { key } = state;
 		const fontSize = levelSizes[node.level as never] || 8;
 		const fontWeight = '600';
-		const color = '#262626';
 		const style: TextStyle = {
-			fontFamily: 'Poppins',
-			fontSize,
 			lineHeight: fontSize * 1.2,
-			fontWeight,
-			color,
 			marginVertical: 12,
 		};
 
 		return createElement(
 			Text,
 			{ key, style },
-			output(node.content, { ...state, color, fontSize, fontWeight }),
+			output(node.content, { ...state, fontSize, fontWeight }),
 		);
 	},
 };

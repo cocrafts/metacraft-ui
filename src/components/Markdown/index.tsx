@@ -14,13 +14,14 @@ interface Props {
 
 export const Markdown: FC<Props> = ({ style, content }) => {
 	const [layout, setLayout] = useState(idleLayout);
-	const { colors, defaultFontFamily } = useSnapshot(themeState);
+	const { dark, colors, defaultFontFamily } = useSnapshot(themeState);
 	const syntaxTree = parse(content);
 
 	const config: MarkdownConfig = {
-		layout,
-		colors,
 		fontFamily: defaultFontFamily,
+		dark,
+		colors,
+		layout,
 	};
 
 	const onLayout = ({ nativeEvent }: LayoutChangeEvent) => {

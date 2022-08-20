@@ -7,6 +7,7 @@ export interface ThemeSizes {
 
 export interface ThemeColors {
 	primary: string;
+	secondary: string;
 	background: string;
 	card: string;
 	border: string;
@@ -14,6 +15,7 @@ export interface ThemeColors {
 	text: string;
 	link: string;
 	alt: string;
+	altText: string;
 }
 
 export interface ThemeState {
@@ -30,6 +32,7 @@ export const paperTheme: ThemeState = {
 	defaultFontFamily: 'Poppins',
 	colors: {
 		primary: '#2C879B',
+		secondary: '#EB5757',
 		background: '#FFFFFF',
 		card: '#FFFFFF',
 		border: '#D8D8D8',
@@ -37,6 +40,7 @@ export const paperTheme: ThemeState = {
 		text: '#222222',
 		link: '#2C879B',
 		alt: '#8f8f9d',
+		altText: '#222222',
 	},
 	sizes: {
 		topNavigation: 70,
@@ -50,13 +54,15 @@ export const nightTheme: ThemeState = {
 	defaultFontFamily: 'Poppins',
 	colors: {
 		primary: '#388BDF',
+		secondary: '#EB5757',
 		background: '#0d1117',
 		card: '#FFFFFF',
 		border: '#D8D8D8',
 		notification: '#FF3B30',
 		text: '#C9D1D9',
 		link: '#58A6FF',
-		alt: '#343941',
+		altText: '#222222',
+		alt: '#545d6c',
 	},
 	sizes: {
 		topNavigation: 70,
@@ -70,6 +76,7 @@ export const fantasyTheme: ThemeState = {
 	defaultFontFamily: 'Poppins',
 	colors: {
 		primary: '#2C879B',
+		secondary: '#EB5757',
 		background: '#002E46',
 		card: '#FFFFFF',
 		border: '#D8D8D8',
@@ -77,6 +84,7 @@ export const fantasyTheme: ThemeState = {
 		text: '#FFFFFF',
 		link: '#2C879B',
 		alt: '#FFFFFF',
+		altText: '#222222',
 	},
 	sizes: {
 		topNavigation: 70,
