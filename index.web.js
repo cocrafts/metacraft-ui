@@ -1,9 +1,9 @@
-import { AppRegistry } from 'react-native';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 
 import App from './src/playground';
 
-AppRegistry.registerComponent('app', () => App);
-AppRegistry.runApplication('app', {
-	initialProps: {},
-	rootTag: document.getElementById('root'),
-});
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(<App />);

@@ -1,3 +1,4 @@
+import { LayoutRectangle } from 'react-native';
 import { outputFor, parserFor, SingleASTNode } from 'simple-markdown';
 import { ThemeColors } from 'utils/state/theme';
 
@@ -6,6 +7,7 @@ import rules from './rules';
 export interface MarkdownConfig {
 	fontFamily: string;
 	colors: ThemeColors;
+	layout: LayoutRectangle;
 }
 
 export interface MarkdownState {

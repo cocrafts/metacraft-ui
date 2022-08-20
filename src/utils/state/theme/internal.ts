@@ -84,4 +84,4 @@ export const fantasyTheme: ThemeState = {
 	},
 };
 
-export const themeState = proxy<ThemeState>(nightTheme);
+export const themeState = proxy<ThemeState>(paperTheme);
