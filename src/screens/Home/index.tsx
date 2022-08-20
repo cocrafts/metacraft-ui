@@ -58,7 +58,7 @@ export const HomeScreen: FC = () => {
 			/>
 			<Markdown
 				style={styles.markdownContainer}
-				content="this is a **universal markdown** area!"
+				content="this `is` a **universal markdown** area!"
 			/>
 		</View>
 	);
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	markdownContainer: {
-		backgroundColor: 'white',
 		padding: 18,
 		borderRadius: 8,
 		marginTop: 20,

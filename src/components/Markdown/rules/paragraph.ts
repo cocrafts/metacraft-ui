@@ -7,7 +7,6 @@ export const paragraph: ParserRule & ReactOutputRule = {
 	react: (node, output, state) => {
 		const { key } = state;
 		const style: TextStyle = {
-			fontFamily: 'Poppins',
 			marginVertical: 8,
 		};
 
