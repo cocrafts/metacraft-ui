@@ -56,10 +56,7 @@ export const HomeScreen: FC = () => {
 				selected={checked}
 				onSelect={(val) => setChecked(val)}
 			/>
-			<Markdown
-				style={styles.markdownContainer}
-				content="this `is` a **universal markdown** area!"
-			/>
+			<Markdown style={styles.markdownContainer} content={markdownContent} />
 		</View>
 	);
 };
@@ -81,3 +78,8 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 });
+
+const markdownContent = `this \`is\` a **universal markdown** area!
+
+with new line, and [link](https://stormgate.io)..
+`;
