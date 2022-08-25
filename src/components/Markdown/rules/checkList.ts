@@ -9,10 +9,10 @@ import {
 
 export const checkList: ParserRule & ReactOutputRule = {
 	order: defaultRules.list.order - 1,
-	match: blockRegex(/^ *(\[.\]) *([^\n]+?) *(?:\n *)+\n/),
+	match: blockRegex(/^ *(\[.]) *([^\n]+?) *(?:\n *)+\n/),
 	parse: (capture, parse, state) => {
 		const listType = capture[0].substring(1, 2);
-		const content = capture[0].replace(/^ *\[.\] ?/gm, '');
+		const content = capture[0].replace(/^ *\[.] ?/gm, '');
 
 		return { listType, content: parse(content, state) };
 	},
