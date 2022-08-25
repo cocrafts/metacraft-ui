@@ -6,6 +6,7 @@ import heading from './heading';
 import image from './image';
 import inlineCode from './inlineCode';
 import link from './link';
+import list from './list';
 import paragraph from './paragraph';
 import strong from './strong';
 import text from './text';
@@ -16,6 +17,7 @@ const rules: ParserRules = {
 	image,
 	link,
 	text,
+	list,
 	strong,
 	del,
 	heading,

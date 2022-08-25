@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import {
 	StyleProp,
-	StyleSheet,
 	TextStyle,
 	TouchableOpacity,
 	ViewStyle,
@@ -19,10 +18,6 @@ import Hoverable from './Hoverable';
 import Text from './Text';
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
-
-const styles = StyleSheet.create({
-	container: {},
-});
 
 interface Props {
 	style?: StyleProp<ViewStyle>;
@@ -51,11 +46,8 @@ export const Hyperlink: FC<Props> = ({
 	};
 
 	return (
-		<Hoverable
-			style={[styles.container, style]}
-			animatedStyle={useHoveredStyle}
-		>
-			<AnimatedTouchable style={styles.container} onPress={onPress}>
+		<Hoverable style={style} animatedStyle={useHoveredStyle}>
+			<AnimatedTouchable onPress={onPress}>
 				{children || <Text style={linkStyle}>{title}</Text>}
 			</AnimatedTouchable>
 		</Hoverable>
