@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Text as DefaultText, TextProps, TextStyle } from 'react-native';
 import { useSnapshot } from 'valtio';
 
+import { injectedFontStyle } from '../utils/font';
 import { dimensionState } from '../utils/state/dimension';
 import { themeState } from '../utils/state/theme';
 
@@ -19,7 +20,7 @@ type Props = TextProps & {
 
 const LightText: FC<Props> = ({ style, ...otherProps }) => {
 	const { colors } = useSnapshot(themeState);
-	const dynamicStyle = [{ fontFamily: 'Poppins', color: colors.text }, style];
+	const dynamicStyle = injectedFontStyle(style, { color: colors.text });
 
 	return <DefaultText style={dynamicStyle} {...otherProps} />;
 };
@@ -30,15 +31,11 @@ const ScaledText: FC<Props> = ({ style, responsiveSizes, ...otherProps }) => {
 	const fontSize = extractSizes(responsiveSizes || [14], responsiveLevel);
 	const lineHeightFactor = (fontSize as number) > 20 ? 1.2 : 1.35;
 
-	const dynamicStyle = [
-		{
-			fontFamily: 'Poppins',
-			color: colors.text,
-			fontSize,
-			lineHeight: (fontSize as number) * lineHeightFactor,
-		},
-		style,
-	];
+	const dynamicStyle = injectedFontStyle(style, {
+		color: colors.text,
+		fontSize,
+		lineHeight: (fontSize as number) * lineHeightFactor,
+	});
 
 	return <DefaultText style={dynamicStyle} {...otherProps} />;
 };
