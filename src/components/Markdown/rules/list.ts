@@ -18,13 +18,12 @@ export const list: ParserRule & ReactOutputRule = {
 		const textStyle: TextStyle = {
 			fontFamily,
 			fontSize: 15,
-			fontWeight: '400',
+			fontWeight: '500',
 			color: color || colors.text,
 		};
 		const bulletStyle: TextStyle = {
 			...textStyle,
 			marginRight: 6,
-			fontSize: 12,
 			color: colors.alt,
 		};
 		const orderedStyle: TextStyle = { ...textStyle, marginRight: 6 };
@@ -42,7 +41,6 @@ export const list: ParserRule & ReactOutputRule = {
 			backgroundColor: colors.primary,
 			borderColor: colors.primary,
 		};
-		const containerStyle: ViewStyle = { flexDirection: 'row' };
 
 		const bullets = items.map((item: SingleASTNode[], i: number) => {
 			const [first, second, ...tails] = item;
@@ -76,14 +74,18 @@ export const list: ParserRule & ReactOutputRule = {
 			};
 
 			return createElement(
-				View,
-				{ key: `${state.key}#${i}`, style: containerStyle },
+				Text,
+				{ key: `${state.key}#${i}` },
 				generateListIcon(),
 				content,
 			);
 		});
 
-		return createElement(View, { key: state.key }, bullets);
+		return createElement(
+			View,
+			{ key: state.key, style: { marginLeft: 8 } },
+			bullets,
+		);
 	},
 };
 
