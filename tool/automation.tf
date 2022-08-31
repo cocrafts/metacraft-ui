@@ -2,11 +2,11 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "3.26.0"
+      version = "~> 4.0"
     }
     random = {
       source = "hashicorp/random"
-      version = "3.0.1"
+      version = "3.4.1"
     }
   }
 
@@ -27,10 +27,17 @@ locals {
 
 resource "aws_s3_bucket" "app" {
   bucket = "metacraft-ui"
+}
 
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
+resource "aws_s3_bucket_website_configuration" "app" {
+  bucket = aws_s3_bucket.app.bucket
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
   }
 }
 

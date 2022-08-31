@@ -8,6 +8,8 @@ import Provider from 'components/Provider';
 import Home from 'screens/Home';
 import { linking } from 'utils/routes';
 const Stack = createStackNavigator();
+import { themeState } from 'utils/state/theme';
+import { useSnapshot } from 'valtio';
 
 const screenOptions: StackNavigationOptions = {
 	headerShown: false,
@@ -15,9 +17,11 @@ const screenOptions: StackNavigationOptions = {
 };
 
 export const Playground: FC = () => {
+	const theme = useSnapshot(themeState);
+
 	return (
 		<Provider>
-			<NavigationContainer linking={linking}>
+			<NavigationContainer linking={linking} theme={theme}>
 				<Stack.Navigator screenOptions={screenOptions}>
 					<Stack.Screen name="Home" component={Home} />
 				</Stack.Navigator>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ModalConfigs } from 'utils/store/modal';
+import { ModalConfigs } from 'utils/state/modal';
 
 const styles = StyleSheet.create({
 	container: {

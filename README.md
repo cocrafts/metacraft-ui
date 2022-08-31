@@ -11,7 +11,7 @@ Cross-platform UI library using React Native, build once run everywhere.
 
 ### Required tools
 - make sure Node.js (suggested version 16.11.1 but other version greater than 14 should be fine)
-- install `wings-cli` via `yarn global add wings-cli`
+- install `metacraft` CLI via `yarn global add @metacraft/cli`
 
 ### Development 
-- in Terminal run `wings` under project's root directory 
+- in Terminal run `metacraft` under project's root directory 
