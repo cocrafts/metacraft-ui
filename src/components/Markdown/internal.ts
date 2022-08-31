@@ -16,6 +16,7 @@ export interface MarkdownState {
 	config: MarkdownConfig;
 	color?: string;
 	fontSize?: number;
+	fontStyle?: 'normal' | 'italic';
 	fontWeight?:
 		| 'normal'
 		| 'bold'
