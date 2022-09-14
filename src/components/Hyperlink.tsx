@@ -1,5 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import {
+	Linking,
+	Platform,
 	StyleProp,
 	TextStyle,
 	TouchableOpacity,
@@ -24,7 +26,9 @@ interface Props {
 	children?: ReactNode;
 	title?: string;
 	titleStyle?: StyleProp<TextStyle>;
-	onPress?: () => void;
+	href?: string;
+	target?: string;
+	onPress?: (href?: string) => void;
 }
 
 export const Hyperlink: FC<Props> = ({
@@ -32,10 +36,13 @@ export const Hyperlink: FC<Props> = ({
 	children,
 	title,
 	titleStyle,
+	href,
+	target = '_blank',
 	onPress,
 }) => {
 	const { colors } = useSnapshot<ThemeState>(themeState);
 	const linkStyle = [{ color: colors.link }, titleStyle];
+	const useBrowserHref = !!href && Platform.OS === 'web';
 
 	const useHoveredStyle = (isHovered: SharedValue<boolean>) => {
 		return useAnimatedStyle(() => {
@@ -45,10 +52,23 @@ export const Hyperlink: FC<Props> = ({
 		}, []);
 	};
 
+	const onLinkPress = async () => {
+		onPress?.(href);
+		if (!useBrowserHref) await Linking.openURL(href as string);
+	};
+
+	const innerElement = children || <Text style={linkStyle}>{title}</Text>;
+
 	return (
 		<Hoverable style={style} animatedStyle={useHoveredStyle}>
-			<AnimatedTouchable onPress={onPress}>
-				{children || <Text style={linkStyle}>{title}</Text>}
+			<AnimatedTouchable onPress={onLinkPress}>
+				{useBrowserHref ? (
+					<a href={href} target={target}>
+						{innerElement}
+					</a>
+				) : (
+					innerElement
+				)}
 			</AnimatedTouchable>
 		</Hoverable>
 	);
