@@ -42,7 +42,7 @@ export const Hyperlink: FC<Props> = ({
 }) => {
 	const { colors } = useSnapshot<ThemeState>(themeState);
 	const linkStyle = [{ color: colors.link }, titleStyle];
-	const useBrowserHref = !!href && Platform.OS === 'web';
+	const isBrowser = Platform.OS === 'web';
 
 	const useHoveredStyle = (isHovered: SharedValue<boolean>) => {
 		return useAnimatedStyle(() => {
@@ -54,7 +54,10 @@ export const Hyperlink: FC<Props> = ({
 
 	const onLinkPress = async () => {
 		onPress?.(href);
-		if (!useBrowserHref) await Linking.openURL(href as string);
+
+		if (href && !isBrowser) {
+			await Linking.openURL(href as string);
+		}
 	};
 
 	const innerElement = children || <Text style={linkStyle}>{title}</Text>;
@@ -62,7 +65,7 @@ export const Hyperlink: FC<Props> = ({
 	return (
 		<Hoverable style={style} animatedStyle={useHoveredStyle}>
 			<AnimatedTouchable onPress={onLinkPress}>
-				{useBrowserHref ? (
+				{!!href && isBrowser ? (
 					<a href={href} target={target}>
 						{innerElement}
 					</a>
