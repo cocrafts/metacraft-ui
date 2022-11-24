@@ -22,6 +22,7 @@ export interface ThemeState {
 	id: string;
 	dark: boolean;
 	defaultFontFamily: string;
+	defaultFontSize: number;
 	colors: ThemeColors;
 	sizes: ThemeSizes;
 }
@@ -30,6 +31,7 @@ export const paperTheme: ThemeState = {
 	id: 'paper',
 	dark: false,
 	defaultFontFamily: 'Poppins',
+	defaultFontSize: 15,
 	colors: {
 		primary: '#2C879B',
 		secondary: '#EB5757',
@@ -52,6 +54,7 @@ export const nightTheme: ThemeState = {
 	id: 'night',
 	dark: true,
 	defaultFontFamily: 'Poppins',
+	defaultFontSize: 15,
 	colors: {
 		primary: '#388BDF',
 		secondary: '#EB5757',
@@ -74,6 +77,7 @@ export const fantasyTheme: ThemeState = {
 	id: 'fantasy',
 	dark: false,
 	defaultFontFamily: 'Poppins',
+	defaultFontSize: 15,
 	colors: {
 		primary: '#2C879B',
 		secondary: '#EB5757',

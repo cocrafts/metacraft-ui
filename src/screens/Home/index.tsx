@@ -82,4 +82,11 @@ const styles = StyleSheet.create({
 const markdownContent = `this \`is\` a **universal markdown** area!
 
 with new line, and [link](https://stormgate.io)..
+
+# h1
+## h2
+### h3
+#### h4
+##### h5
+###### h6
 `;

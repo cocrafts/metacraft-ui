@@ -6,6 +6,7 @@ import rules from './rules';
 
 export interface MarkdownConfig {
 	fontFamily: string;
+	fontSize: number;
 	dark: boolean;
 	colors: ThemeColors;
 	layout: LayoutRectangle;
