@@ -15,7 +15,7 @@ export const inlineCode: ParserRule & ReactOutputRule = {
 		const style: TextStyle = {
 			fontFamily,
 			fontWeight: '400',
-			fontSize: 15,
+			fontSize: 14,
 			backgroundColor: transparentize(colors.alt as never, transparentAmount),
 			borderRadius: 6,
 			paddingHorizontal: 5,

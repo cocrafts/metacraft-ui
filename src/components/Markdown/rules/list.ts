@@ -17,7 +17,7 @@ export const list: ParserRule & ReactOutputRule = {
 
 		const textStyle: TextStyle = {
 			fontFamily,
-			fontSize: 15,
+			fontSize: 14,
 			fontWeight: '500',
 			color: color || colors.text,
 		};

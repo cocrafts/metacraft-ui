@@ -13,7 +13,7 @@ export const text: ParserRule & ReactOutputRule = {
 
 		const style: TextStyle = {
 			fontFamily,
-			fontSize: fontSize || 15,
+			fontSize: fontSize || 14,
 			fontWeight: fontWeight || '400',
 			fontStyle: fontStyle || 'normal',
 			color: color || colors.text,
