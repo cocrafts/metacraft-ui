@@ -6,5 +6,6 @@ export * from './components/Markdown';
 export * from './components/Provider';
 export * from './components/Text';
 export * from './utils/state/app';
+export * from './utils/state/dimension';
 export * from './utils/state/modal';
 export * from './utils/state/theme';

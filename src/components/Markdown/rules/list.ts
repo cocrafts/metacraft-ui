@@ -12,12 +12,12 @@ export const list: ParserRule & ReactOutputRule = {
 	...defaultRules.list,
 	react: (node, output, state) => {
 		const { color, config } = state;
-		const { fontFamily, colors }: MarkdownConfig = config;
+		const { fontFamily, fontSize, colors }: MarkdownConfig = config;
 		const items = node.items || [];
 
 		const textStyle: TextStyle = {
 			fontFamily,
-			fontSize: 15,
+			fontSize,
 			fontWeight: '500',
 			color: color || colors.text,
 		};

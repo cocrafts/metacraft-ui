@@ -10,18 +10,22 @@ import { MarkdownConfig, parse, reactOutput } from './internal';
 interface Props {
 	style?: ViewStyle;
 	content: string;
+	configs?: Partial<MarkdownConfig>;
 }
 
-export const Markdown: FC<Props> = ({ style, content }) => {
+export const Markdown: FC<Props> = ({ style, content, configs }) => {
 	const [layout, setLayout] = useState(idleLayout);
-	const { dark, colors, defaultFontFamily } = useSnapshot(themeState);
+	const { dark, colors, defaultFontFamily, defaultFontSize } =
+		useSnapshot(themeState);
 	const syntaxTree = parse(content);
 
 	const config: MarkdownConfig = {
 		fontFamily: defaultFontFamily,
+		fontSize: defaultFontSize,
 		dark,
 		colors,
 		layout,
+		...configs,
 	};
 
 	const onLayout = ({ nativeEvent }: LayoutChangeEvent) => {

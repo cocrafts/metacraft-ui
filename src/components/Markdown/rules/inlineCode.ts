@@ -9,13 +9,13 @@ export const inlineCode: ParserRule & ReactOutputRule = {
 	...defaultRules.inlineCode,
 	react: (node, output, state) => {
 		const { color, config } = state;
-		const { dark, fontFamily, colors }: MarkdownConfig = config;
+		const { dark, fontFamily, fontSize, colors }: MarkdownConfig = config;
 		const transparentAmount = dark ? 0.5 : 0.8;
 
 		const style: TextStyle = {
 			fontFamily,
 			fontWeight: '400',
-			fontSize: 15,
+			fontSize,
 			backgroundColor: transparentize(colors.alt as never, transparentAmount),
 			borderRadius: 6,
 			paddingHorizontal: 5,
