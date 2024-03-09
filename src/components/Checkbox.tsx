@@ -27,22 +27,24 @@ export const Checkbox: FC<Props> = ({
 	const innerSize = size - 4;
 	const progress = useSharedValue(selected ? 1 : 0);
 
-	const innerStyle = useAnimatedStyle(() => ({
-		width: innerSize,
-		height: innerSize,
-		borderRadius: 4,
-		borderWidth: 2,
-		borderColor: interpolateColor(
-			progress.value,
-			[0, 1],
-			[colors.alt, 'white'],
-		),
-		backgroundColor: interpolateColor(
-			progress.value,
-			[0, 1],
-			['white', colors.primary],
-		),
-	}));
+	const innerStyle = useAnimatedStyle(() => {
+		return {
+			width: innerSize,
+			height: innerSize,
+			borderRadius: 4,
+			borderWidth: 2,
+			borderColor: interpolateColor(
+				progress.value,
+				[0, 1],
+				[colors.alt, 'white'],
+			),
+			backgroundColor: interpolateColor(
+				progress.value,
+				[0, 1],
+				['white', colors.primary],
+			),
+		};
+	}, [innerSize, progress, colors]);
 
 	useEffect(() => {
 		progress.value = withTiming(selected ? 1 : 0, { duration: 250 });

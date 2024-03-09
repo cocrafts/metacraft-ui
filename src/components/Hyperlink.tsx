@@ -49,7 +49,7 @@ export const Hyperlink: FC<Props> = ({
 			return {
 				opacity: withSpring(isHovered.value ? 0.5 : 1),
 			};
-		}, []);
+		}, [isHovered]);
 	};
 
 	const onLinkPress = async () => {

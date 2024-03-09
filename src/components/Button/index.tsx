@@ -66,7 +66,7 @@ export const Button: FC<Props> = ({
 				backgroundColor: withSpring(isHovered.value ? hoveredBg : bg),
 				borderColor: withSpring(isHovered.value ? hoveredBorder : border),
 			};
-		}, [backgroundColor]);
+		}, [isHovered, hoverColors, backgroundColor]);
 	};
 
 	return (

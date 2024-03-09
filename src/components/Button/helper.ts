@@ -12,12 +12,14 @@ export type HoveredStyleFunc = (
 ) => AnimatedStyleProp<ViewStyle>;
 
 export const useDefaultHoveredStyle: HoveredStyleFunc = (isHovered) =>
-	useAnimatedStyle(() => ({
-		backgroundColor: withTiming(
-			isHovered.value ? 'rgb(112,185,232)' : 'rgb(82,156,222)',
-			{ duration: 120 },
-		),
-	}));
+	useAnimatedStyle(() => {
+		return {
+			backgroundColor: withTiming(
+				isHovered.value ? 'rgb(112,185,232)' : 'rgb(82,156,222)',
+				{ duration: 120 },
+			),
+		};
+	}, [isHovered]);
 
 interface HoverColors {
 	background: [string, string];

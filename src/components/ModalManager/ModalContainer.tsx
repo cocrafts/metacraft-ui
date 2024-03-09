@@ -58,14 +58,16 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	const opacity = useSharedValue(0);
 	const pointerEvents = item.hide || withoutMask ? 'none' : 'auto';
 
-	const maskAnimatedStyle = useAnimatedStyle(() => ({
-		opacity: interpolate(
-			opacity.value,
-			[0, 1],
-			[0, maskActiveOpacity],
-			Extrapolate.CLAMP,
-		),
-	}));
+	const maskAnimatedStyle = useAnimatedStyle(() => {
+		return {
+			opacity: interpolate(
+				opacity.value,
+				[0, 1],
+				[0, maskActiveOpacity],
+				Extrapolate.CLAMP,
+			),
+		};
+	}, [opacity, maskActiveOpacity]);
 
 	const wrapperStyle = useAnimatedStyle(() => {
 		return rectangleAnimatedStyle(opacity, item.animateDirection, {
