@@ -29,6 +29,10 @@ export const modalActions = {
 		const instance = modalState.hashmap[id];
 		if (instance) instance.hide = true;
 	},
+	destroy: (id?: string): void => {
+		const safeId = id || 'default-modal';
+		delete modalState.hashmap[safeId];
+	},
 };
 
 export * from './helper';

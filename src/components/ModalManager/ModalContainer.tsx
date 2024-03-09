@@ -78,7 +78,15 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	}, []);
 
 	useEffect(() => {
-		opacity.value = withSpring(item.hide ? 0 : 1);
+		if (item.hide) {
+			opacity.value = withSpring(0, {}, (finished) => {
+				if (finished) {
+					modalActions.destroy(item.id);
+				}
+			});
+		} else {
+			opacity.value = withSpring(1);
+		}
 	}, [item.hide]);
 
 	useEffect(() => {
