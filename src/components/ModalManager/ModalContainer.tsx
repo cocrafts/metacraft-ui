@@ -77,7 +77,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 			left: left.value,
 			opacity: opacity.value,
 		});
-	}, [opacity]);
+	}, [opacity, top, left]);
 
 	useEffect(() => {
 		if (item.hide) {
