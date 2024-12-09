@@ -2,9 +2,11 @@ import React, { FC, useEffect, useRef } from 'react';
 import {
 	LayoutChangeEvent,
 	LayoutRectangle,
+	Platform,
 	StyleSheet,
 	TouchableWithoutFeedback,
 	View,
+	ViewStyle,
 } from 'react-native';
 import Animated, {
 	Extrapolate,
@@ -15,10 +17,13 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import {
+	measureRelative,
 	modalActions,
 	ModalConfigs,
+	modalState,
 	rectangleAnimatedStyle,
 	rectangleBind,
+	referenceMap,
 } from '../../utils/state/modal';
 
 interface Props {
@@ -51,10 +56,16 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		maskStyle,
 		maskActiveOpacity = 0.5,
 		withoutMask,
+		fullWidth = true,
+		fullHeight = false,
+		onMaskTouchToClose = true,
 	} = item;
+
 	const layout = useRef<LayoutRectangle>();
 	const top = useSharedValue(0);
 	const left = useSharedValue(0);
+	const height = useSharedValue(1);
+	const width = useSharedValue(0);
 	const opacity = useSharedValue(0);
 	const pointerEvents = item.hide || withoutMask ? 'none' : 'auto';
 
@@ -70,13 +81,26 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	}, [opacity, maskActiveOpacity]);
 
 	const wrapperStyle = useAnimatedStyle(() => {
-		return rectangleAnimatedStyle(opacity, item.animateDirection, {
+		const baseStyle: ViewStyle = {
 			position: 'absolute',
-			overflow: 'hidden',
 			top: top.value,
 			left: left.value,
 			opacity: opacity.value,
-		});
+		};
+
+		if (fullWidth) baseStyle.width = width.value;
+
+		if (fullHeight) {
+			baseStyle.height = height.value;
+			baseStyle.bottom = 0;
+
+			if (positionOffset?.y && positionOffset.y > 0) {
+				baseStyle.height -= positionOffset.y;
+				baseStyle.top = positionOffset.y;
+			}
+		}
+
+		return rectangleAnimatedStyle(opacity, item.animateDirection, baseStyle);
 	}, [opacity, top, left]);
 
 	useEffect(() => {
@@ -107,9 +131,33 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		layout.current = nativeEvent.layout;
 		top.value = calculatedRectangle.y;
 		left.value = calculatedRectangle.x;
+		width.value = calculatedRectangle.width;
+		height.value = calculatedRectangle.height;
 	};
 
+	useEffect(() => {
+		if (Platform.OS !== 'web') return;
+		const actualBindingRef =
+			referenceMap[item.id || 'default-modal'] || referenceMap.root;
+		if (!actualBindingRef.current) return;
+
+		const bindingObserver = new ResizeObserver(async () => {
+			const safeId = item.id || 'default-modal';
+			const updatedBindingRectangle = await measureRelative(
+				referenceMap[safeId],
+			);
+			modalState.hashmap[safeId] = {
+				...item,
+				bindingRectangle: updatedBindingRectangle,
+			};
+		});
+		bindingObserver.observe(actualBindingRef.current as never);
+
+		return () => bindingObserver.disconnect();
+	}, []);
+
 	const closeModal = () => {
+		if (!onMaskTouchToClose) return;
 		modalActions.hide(item.id as string);
 	};
 
