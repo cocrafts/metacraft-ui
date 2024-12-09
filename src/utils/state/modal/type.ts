@@ -54,6 +54,9 @@ export interface ModalConfigs {
 	withoutMask?: boolean;
 	hide?: boolean;
 	context?: unknown;
+	fullWidth?: boolean;
+	fullHeight?: boolean;
+	onMaskTouchToClose?: boolean;
 }
 
 export type ShowModalConfigs = Omit<
