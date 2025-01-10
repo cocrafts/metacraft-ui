@@ -31,10 +31,10 @@ export const modalActions = {
 	): void => {
 		const instance = modalState.hashmap[id];
 		if (instance) {
-			instance.hide = true;
 			if (options.animation) {
 				instance.hideWithAnimation = true;
 			}
+			instance.hide = true;
 		}
 	},
 	destroy: (id?: string): void => {

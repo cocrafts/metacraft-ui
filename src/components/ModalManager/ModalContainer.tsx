@@ -107,6 +107,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	useEffect(() => {
 		if (item.hide) {
 			if (item.hideWithAnimation) {
+				opacity.value = 0;
 				modalActions.destroy(item.id);
 			} else {
 				opacity.value = withSpring(0, {}, (finished) => {
