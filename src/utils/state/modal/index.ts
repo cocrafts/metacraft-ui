@@ -25,9 +25,17 @@ export const modalActions = {
 			};
 		});
 	},
-	hide: (id: string): void => {
+	hide: (
+		id: string,
+		options: { animation?: boolean } = { animation: true },
+	): void => {
 		const instance = modalState.hashmap[id];
-		if (instance) instance.hide = true;
+		if (instance) {
+			instance.hide = true;
+			if (options.animation) {
+				instance.hideWithAnimation = true;
+			}
+		}
 	},
 	destroy: (id?: string): void => {
 		const safeId = id || 'default-modal';
