@@ -53,6 +53,7 @@ export interface ModalConfigs {
 	maskActiveOpacity?: number;
 	withoutMask?: boolean;
 	hide?: boolean;
+	hideWithAnimation?: boolean;
 	context?: unknown;
 	fullWidth?: boolean;
 	fullHeight?: boolean;

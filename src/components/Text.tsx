@@ -1,5 +1,10 @@
 import React, { FC } from 'react';
-import { Text as DefaultText, TextProps, TextStyle } from 'react-native';
+import {
+	StyleProp,
+	Text as DefaultText,
+	TextProps,
+	TextStyle,
+} from 'react-native';
 import { useSnapshot } from 'valtio';
 
 import { injectedFontStyle } from '../utils/font';
@@ -14,7 +19,7 @@ export type ScaledSizes = [
 ];
 
 type Props = TextProps & {
-	style?: TextStyle;
+	style?: StyleProp<TextStyle>;
 	responsiveSizes?: ScaledSizes;
 };
 
