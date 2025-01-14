@@ -59,6 +59,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		fullWidth = true,
 		fullHeight = false,
 		onMaskTouchToClose = true,
+		onClose,
 	} = item;
 
 	const layout = useRef<LayoutRectangle>();
@@ -159,6 +160,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 	const closeModal = () => {
 		if (!onMaskTouchToClose) return;
 		modalActions.hide(item.id as string);
+		onClose && onClose();
 	};
 
 	return (
