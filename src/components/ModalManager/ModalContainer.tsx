@@ -60,6 +60,7 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 		fullHeight = false,
 		onMaskTouchToClose = true,
 		onClose,
+		showWithAnimation = true,
 	} = item;
 
 	const layout = useRef<LayoutRectangle>();
@@ -117,7 +118,11 @@ export const ModalContainer: FC<Props> = ({ item }) => {
 				});
 			}
 		} else {
-			opacity.value = withSpring(1);
+			if (showWithAnimation) {
+				opacity.value = withSpring(1);
+			} else {
+				opacity.value = 1;
+			}
 		}
 	}, [item.hide]);
 
