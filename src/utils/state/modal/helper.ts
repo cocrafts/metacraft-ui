@@ -10,8 +10,13 @@ export const measure = async (
 	viewRef: RefObject<View>,
 ): Promise<LayoutRectangle> =>
 	new Promise((resolve) => {
-		/* for Android, measure method won't behave well without collapsable = false */
-		viewRef.current?.setNativeProps({ collapsable: false });
+		/**
+		 * for Android, measure method won't behave well without collapsable = false.
+		 * Safely call the setNativeProps as react-native-web@19 has removed it
+		 */
+		if (typeof viewRef.current?.setNativeProps === 'function') {
+			viewRef.current.setNativeProps({ collapsable: false });
+		}
 
 		setTimeout(() => {
 			/* <-- at this point in time, collapsable = false must be ready/configured correctly */
